@@ -2,19 +2,22 @@ from inspect import getsource, getmembers, isfunction
 import json
 import random
 from pathlib import Path
+import re
 
 # Parameters
 
 # replace f_file with the name of .py file containing functions
 import f_file as functions
 
+FUNCTIONS_FILE = "f_file.py"
 DATASET_NAME = "list_20"
 DATA_SIZE = 20
 EXAMPLES_PER_TASK = 30
 SEED = 1984
 MIN_LIST_LENGTH = 2
 MAX_LIST_LENGTH = 5
-LIST_DEFINITION_SPACE = range(100)
+INT_DEFINITION_SPACE = range(100)
+BOOL_DEFINITION_SPACE = [True, False]
 
 # Initialization
 
@@ -35,6 +38,28 @@ for path in [
 random.seed(SEED)
 task_names_iterators = {}
 
+# Core
+
+
+def random_list_int():
+    list_len = random.randint(MIN_LIST_LENGTH, MAX_LIST_LENGTH)
+    return random.choices(INT_DEFINITION_SPACE, k=list_len)
+
+
+def random_list_bool():
+    list_len = random.randint(MIN_LIST_LENGTH, MAX_LIST_LENGTH)
+    return random.choices(BOOL_DEFINITION_SPACE, k=list_len)
+
+
+def random_int():
+    return random.choice(INT_DEFINITION_SPACE)
+
+
+type_def_to_sample = {
+    'int': random_int,
+    'list-of-int': random_list_int,
+    'list-of-bool': random_list_bool,
+}
 
 def generate_data():
     examples_data = []
@@ -47,20 +72,26 @@ def generate_data():
             task_names_iterators[function_name] = 0
         task_name = function_name + str(task_names_iterators[function_name])
         task_names_iterators[function_name] += 1
+        source_code = getsource(function)
+        type_comment = re.search(
+            "(?:\\n\s+)\#\s(.+)(?:\s\-\>\s)(.+)\s\#", source_code)
+        source_code = source_code.replace(type_comment.group(0), '')
+        input_type_string = type_comment.group(1)
+        output_type_string = type_comment.group(2)
         examples = []
         for _ in range(EXAMPLES_PER_TASK):
             list_len = random.randint(MIN_LIST_LENGTH, MAX_LIST_LENGTH)
-            input = random.sample(LIST_DEFINITION_SPACE, list_len)
+            input = type_def_to_sample[input_type_string]()
             output = function(input)
             examples.append({"i": input, "o": output})
         examples_data.append(
             {
-                "type": {"input": "list-of-int", "output": "list-of-int"},
+                "type": {"input": input_type_string, "output": output_type_string},
                 "name": task_name,
                 "examples": examples,
             }
         )
-        language_data[task_name] = getsource(function)
+        language_data[task_name] = source_code
 
     for source_code in language_data.values():
         source_code = source_code.split(" ")
