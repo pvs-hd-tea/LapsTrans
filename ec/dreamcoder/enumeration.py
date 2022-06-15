@@ -317,7 +317,7 @@ def solveForTask_ocaml(_=None,
         process = subprocess.Popen(solver_file,
                                    stdin=subprocess.PIPE,
                                    stdout=subprocess.PIPE)
-        limit_virtual_memory_with_psutil_if_possible(process, max_mem_per_enumeration_thread)
+        # limit_virtual_memory_with_psutil_if_possible(process, max_mem_per_enumeration_thread)
         
         response, error = process.communicate(bytes(message, encoding="utf-8"))
         response = json.loads(response.decode("utf-8"))
