@@ -41,7 +41,6 @@ tests/out/
 moses_compiled/
 .word_vectors_cache
 .DS_Store
-.vscode/
 
 clevrSolver
 compression
