@@ -238,9 +238,6 @@ def list_options(parser):
     parser.add_argument(
         "--noLength", action="store_true", default=False,
         help="Disable built-in length primitive")
-    parser.add_argument("--maxTasks", type=int,
-                        default=None,
-                        help="truncate tasks to fit within this boundary")
     parser.add_argument("--primitives",
                         default="common",
                         help="Which primitive set to use",
