@@ -1,12 +1,10 @@
 import random
-from collections import defaultdict
 import json
-import math
 import os
 import datetime
 
-from dreamcoder.dreamcoder import explorationCompression
-from dreamcoder.utilities import eprint, flatten, testTrainSplit
+from dreamcoder.dreamcoder import ecIterator 
+from dreamcoder.utilities import eprint, flatten
 from dreamcoder.grammar import Grammar
 from dreamcoder.task import Task
 from dreamcoder.type import Context, arrow, tbool, tlist, tint, t0, UnificationFailure
@@ -15,7 +13,7 @@ from dreamcoder.recognition import RecurrentFeatureExtractor
 from dreamcoder.domains.list.makeListTasks import make_list_bootstrap_tasks, sortBootstrap, EASYLISTTASKS
 
 
-def retrieveJSONTasks(filename, features=False):
+def retrieveJSONTasks(file, features=False):
     """
     For JSON of the form:
         {"name": str,
@@ -23,8 +21,7 @@ def retrieveJSONTasks(filename, features=False):
                   "output": bool|int|list-of-bool|list-of-int},
          "examples": [{"i": data, "o": data}]}
     """
-    with open(filename, "r") as f:
-        loaded = json.load(f)
+    loaded = json.load(file)
     TP = {
         "bool": tbool,
         "int": tint,
@@ -40,6 +37,17 @@ def retrieveJSONTasks(filename, features=False):
         cache=False,
     ) for item in loaded]
 
+def loadListDataset(task_dataset):
+    dataset_path = os.path.join("data/list/tasks", task_dataset)
+    tasks = {"train": [], "test": []}
+
+    for split in ("train", "test"):
+        split_path = os.path.join(dataset_path, split)
+        with open(os.path.join(split_path, "tasks.json")) as file:
+            tasks[split] = retrieveJSONTasks(file, features=False)
+            for t in tasks[split]:
+                t.stringConstants = []
+    return tasks["train"], tasks["test"]
 
 def list_features(examples):
     if any(isinstance(i, int) for (i,), _ in examples):
@@ -230,17 +238,6 @@ def list_options(parser):
     parser.add_argument(
         "--noLength", action="store_true", default=False,
         help="Disable built-in length primitive")
-    parser.add_argument(
-        "--dataset",
-        type=str,
-        default="Lucas-old",
-        choices=[
-            "bootstrap",
-            "sorting",
-            "Lucas-old",
-            "Lucas-depth1",
-            "Lucas-depth2",
-            "Lucas-depth3"])
     parser.add_argument("--maxTasks", type=int,
                         default=None,
                         help="truncate tasks to fit within this boundary")
@@ -251,13 +248,19 @@ def list_options(parser):
     parser.add_argument("--extractor", type=str,
                         choices=["hand", "deep", "learned"],
                         default="learned")
-    parser.add_argument("--split", metavar="TRAIN_RATIO",
-                        type=float,
-                        help="split test/train")
     parser.add_argument("-H", "--hidden", type=int,
                         default=64,
                         help="number of hidden units")
     parser.add_argument("--random-seed", type=int, default=17)
+    parser.add_argument("--languageDatasetDir", default="data/list/language")
+    parser.add_argument(
+        "--taskDataset", type=str, help="Load pre-generated task datasets."
+    )
+    parser.add_argument(
+        "--iterations_as_epochs",
+        default=True,
+        help="Whether to take the iterations value as an epochs value.",
+    )
 
 
 def main(args):
@@ -267,144 +270,63 @@ def main(args):
     """
     random.seed(args.pop("random_seed"))
 
-    dataset = args.pop("dataset")
-    tasks = {
-        "Lucas-old": lambda: retrieveJSONTasks("data/list_tasks.json") + sortBootstrap(),
-        "bootstrap": make_list_bootstrap_tasks,
-        "sorting": sortBootstrap,
-        "Lucas-depth1": lambda: retrieveJSONTasks("data/list_tasks2.json")[:105],
-        "Lucas-depth2": lambda: retrieveJSONTasks("data/list_tasks2.json")[:4928],
-        "Lucas-depth3": lambda: retrieveJSONTasks("data/list_tasks2.json"),
-    }[dataset]()
+    dataset = args.pop("taskDataset")
+    # interesting line we might need later:
+    # "Lucas-old": lambda: retrieveJSONTasks("data/list_tasks.json") + sortBootstrap(),
+    train, test = loadListDataset(dataset)
+    eprint(
+        f"Loaded dataset [{dataset}]: [{len(train)}] train and [{len(test)}] test tasks."
+    )
 
-    maxTasks = args.pop("maxTasks")
-    if maxTasks and len(tasks) > maxTasks:
-        necessaryTasks = []  # maxTasks will not consider these
-        if dataset.startswith("Lucas2.0") and dataset != "Lucas2.0-depth1":
-            necessaryTasks = tasks[:105]
-
-        eprint("Unwilling to handle {} tasks, truncating..".format(len(tasks)))
-        random.shuffle(tasks)
-        del tasks[maxTasks:]
-        tasks = necessaryTasks + tasks
-
-    if dataset.startswith("Lucas"):
-        # extra tasks for filter
-        tasks.extend([
-            Task("remove empty lists",
-                 arrow(tlist(tlist(tbool)), tlist(tlist(tbool))),
-                 [((ls,), list(filter(lambda l: len(l) > 0, ls)))
-                  for _ in range(15)
-                  for ls in [[[random.random() < 0.5 for _ in range(random.randint(0, 3))]
-                              for _ in range(4)]]]),
-            Task("keep squares",
-                 arrow(tlist(tint), tlist(tint)),
-                 [((xs,), list(filter(lambda x: int(math.sqrt(x)) ** 2 == x,
-                                      xs)))
-                  for _ in range(15)
-                  for xs in [[random.choice([0, 1, 4, 9, 16, 25])
-                              if random.random() < 0.5
-                              else random.randint(0, 9)
-                              for _ in range(7)]]]),
-            Task("keep primes",
-                 arrow(tlist(tint), tlist(tint)),
-                 [((xs,), list(filter(lambda x: x in {2, 3, 5, 7, 11, 13, 17,
-                                                      19, 23, 29, 31, 37}, xs)))
-                  for _ in range(15)
-                  for xs in [[random.choice([2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37])
-                              if random.random() < 0.5
-                              else random.randint(0, 9)
-                              for _ in range(7)]]]),
-        ])
-        for i in range(4):
-            tasks.extend([
-                Task("keep eq %s" % i,
-                     arrow(tlist(tint), tlist(tint)),
-                     [((xs,), list(filter(lambda x: x == i, xs)))
-                      for _ in range(15)
-                      for xs in [[random.randint(0, 6) for _ in range(5)]]]),
-                Task("remove eq %s" % i,
-                     arrow(tlist(tint), tlist(tint)),
-                     [((xs,), list(filter(lambda x: x != i, xs)))
-                      for _ in range(15)
-                      for xs in [[random.randint(0, 6) for _ in range(5)]]]),
-                Task("keep gt %s" % i,
-                     arrow(tlist(tint), tlist(tint)),
-                     [((xs,), list(filter(lambda x: x > i, xs)))
-                      for _ in range(15)
-                      for xs in [[random.randint(0, 6) for _ in range(5)]]]),
-                Task("remove gt %s" % i,
-                     arrow(tlist(tint), tlist(tint)),
-                     [((xs,), list(filter(lambda x: not x > i, xs)))
-                      for _ in range(15)
-                      for xs in [[random.randint(0, 6) for _ in range(5)]]])
-            ])
-
-    def isIdentityTask(t):
-        return all( len(xs) == 1 and xs[0] == y for xs, y in t.examples  )
-    eprint("Removed", sum(isIdentityTask(t) for t in tasks), "tasks that were just the identity function")
-    tasks = [t for t in tasks if not isIdentityTask(t) ]
-
-    prims = {"base": basePrimitives,
-             "McCarthy": McCarthyPrimitives,
-             "common": bootstrapTarget_extra,
-             "noLength": no_length,
-             "rich": primitives}[args.pop("primitives")]()
+    prims = {
+        "base": basePrimitives,
+        "McCarthy": McCarthyPrimitives,
+        "common": bootstrapTarget_extra,
+        "noLength": no_length,
+        "rich": primitives,
+    }[args.pop("primitives")]()
     haveLength = not args.pop("noLength")
     haveMap = not args.pop("noMap")
     haveUnfold = not args.pop("noUnfold")
     eprint(f"Including map as a primitive? {haveMap}")
     eprint(f"Including length as a primitive? {haveLength}")
     eprint(f"Including unfold as a primitive? {haveUnfold}")
-    baseGrammar = Grammar.uniform([p
-                                   for p in prims
-                                   if (p.name != "map" or haveMap) and \
-                                   (p.name != "unfold" or haveUnfold) and \
-                                   (p.name != "length" or haveLength)])
+    baseGrammar = Grammar.uniform(
+        [
+            p
+            for p in prims
+            if (p.name != "map" or haveMap)
+            and (p.name != "unfold" or haveUnfold)
+            and (p.name != "length" or haveLength)
+        ]
+    )
 
     extractor = {
         "learned": LearnedFeatureExtractor,
     }[args.pop("extractor")]
     extractor.H = args.pop("hidden")
+    use_epochs = args.pop("iterations_as_epochs")
+    if use_epochs and args["taskBatchSize"] is not None:
+        eprint("Using iterations as epochs")
+        args["iterations"] *= int(len(train) / args["taskBatchSize"])
+        eprint(f"Now running for n={args['iterations']} iterations.")
 
     timestamp = datetime.datetime.now().isoformat()
-    outputDirectory = "experimentOutputs/list/%s"%timestamp
-    os.system("mkdir -p %s"%outputDirectory)
-    
-    args.update({
-        "featureExtractor": extractor,
-        "outputPrefix": "%s/list"%outputDirectory,
-        "evaluationTimeout": 0.0005,
-    })
-    
+    outputDirectory = "experimentOutputs/list/%s" % timestamp
+    os.system("mkdir -p %s" % outputDirectory)
 
-    eprint("Got {} list tasks".format(len(tasks)))
-    split = args.pop("split")
-    if split:
-        train_some = defaultdict(list)
-        for t in tasks:
-            necessary = train_necessary(t)
-            if not necessary:
-                continue
-            if necessary == "some":
-                train_some[t.name.split()[0]].append(t)
-            else:
-                t.mustTrain = True
-        for k in sorted(train_some):
-            ts = train_some[k]
-            random.shuffle(ts)
-            ts.pop().mustTrain = True
-
-        test, train = testTrainSplit(tasks, split)
-        if True:
-            test = [t for t in test
-                    if t.name not in EASYLISTTASKS]
-
-        eprint(
-            "Alotted {} tasks for training and {} for testing".format(
-                len(train), len(test)))
-    else:
-        train = tasks
-        test = []
-
-    explorationCompression(baseGrammar, train, testingTasks=test, **args)
+    args.update(
+        {
+            "featureExtractor": extractor,
+            "outputPrefix": "%s/list" % outputDirectory,
+            "evaluationTimeout": 0.0005,
+        }
+    )
+    generator = ecIterator(
+        baseGrammar,
+        train,
+        testingTasks=test,
+        **args,
+    )
+    for result in generator:
+        pass
