@@ -28,6 +28,7 @@ data/cogsci_2019/*
 data/re2
 data/geom/
 data/logo/
+data/list/
 !data/puddleworld/
 
 data/taskRankGraphs
@@ -40,3 +41,14 @@ tests/out/
 moses_compiled/
 .word_vectors_cache
 .DS_Store
+.vscode/
+
+clevrSolver
+compression
+helmholtz
+logoDrawString
+protonet-tester
+solver
+versionDemo
+solvers/.merlin
+solvers/*/.merlin
