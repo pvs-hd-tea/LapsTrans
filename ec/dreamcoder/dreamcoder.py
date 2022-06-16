@@ -13,6 +13,7 @@ from dreamcoder.dreaming import backgroundHelmholtzEnumeration
 from dreamcoder.parser import *
 from dreamcoder.languageUtilities import *
 from dreamcoder.translation import *
+from lapstrans_extensions.code_tokenizer import tokenize_codestring
 
 class ECResult():
     def __init__(self, _=None,
@@ -231,6 +232,7 @@ def ecIterator(grammar, tasks,
                test_sleep_recognition_0=False, # Integration test for the examples-only recognizer.
                test_sleep_recognition_1=False, # Integration test for the language-based recognizer.
                test_next_iteration_settings=False, # Integration test for the second iteration.
+               use_code_tokenizer=False
                ):
     if enumerationTimeout is None:
         eprint(
@@ -702,6 +704,7 @@ def ecIterator(grammar, tasks,
             if all( f.empty for f in result.allFrontiers.values() ):
                 eprint("No non-empty frontiers to train a translation model, skipping.")
             else:
+                tokenizer_fn = None if not use_code_tokenizer else tokenize_codestring
                 translation_info = induce_synchronous_grammar(frontiers=result.allFrontiers.values(),
                                 tasks=tasks, testingTasks=testingTasks, tasksAttempted=result.tasksAttempted,
                                 grammar=grammar, 
@@ -713,7 +716,8 @@ def ecIterator(grammar, tasks,
                                 max_phrase_length=smt_phrase_length,
                                 pseudoalignments=smt_pseudoalignments,
                                 debug=debug,
-                                iteration=j)
+                                iteration=j,
+                                tokenizer_fn=tokenizer_fn)
         
         #### Recognition model round 1. With language, using the joint generative model to label the Helmholtz samples.
         if len(recognition_1) > 0:
@@ -978,8 +982,9 @@ def induce_synchronous_grammar(frontiers, tasks, testingTasks, tasksAttempted, g
                     max_phrase_length=None,
                     pseudoalignments=None,
                     debug=None,
-                    iteration=None):    
-    encoder = language_encoder(tasks, testingTasks=testingTasks, cuda=False, language_data=language_data, lexicon=language_lexicon)
+                    iteration=None,
+                    tokenizer_fn = None):    
+    encoder = language_encoder(tasks, testingTasks=testingTasks, cuda=False, language_data=language_data, lexicon=language_lexicon, tokenizer_fn=tokenizer_fn)
     n_frontiers = len([f for f in frontiers if not f.empty])
     eprint(f"Inducing synchronous grammar. Using n=[{n_frontiers} frontiers],")
     if n_frontiers == 0:    
@@ -1563,6 +1568,10 @@ def commandlineArguments(_=None,
                         choices=["loglinear"],
                         default='loglinear',
                         type=str)              
+    parser.add_argument("--useCodeTokenizer",
+                        dest="use_code_tokenizer",
+                        help="Use code tokenizer instead of NL tokenizer on the task descriptions",
+                        action='store_true')
     parser.set_defaults(recognition_0=recognition_0,
                         useDSL=True,
                         featureExtractor=featureExtractor,
