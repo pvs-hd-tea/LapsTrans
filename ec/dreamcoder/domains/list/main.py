@@ -172,8 +172,9 @@ class LearnedFeatureExtractor(RecurrentFeatureExtractor):
             else:
                 y = [y]
             y = sanitize(y)
-            if len(y) > self.maximumLength:
-                return None
+            # Not sure why this and the following None-returns were doing in DC, but LAPS's torch crashes if the tokenize ever returns None.
+            # if len(y) > self.maximumLength:
+            #    return None
 
             serializedInputs = []
             for xi, x in enumerate(xs):
@@ -182,8 +183,8 @@ class LearnedFeatureExtractor(RecurrentFeatureExtractor):
                 else:
                     x = [x]
                 x = sanitize(x)
-                if len(x) > self.maximumLength:
-                    return None
+                # if len(x) > self.maximumLength:
+                #    return None
                 serializedInputs.append(x)
 
             tokenized.append((tuple(serializedInputs), y))
@@ -211,7 +212,9 @@ class LearnedFeatureExtractor(RecurrentFeatureExtractor):
             tasks=tasks,
             cuda=cuda,
             H=self.H,
-            bidirectional=True)
+            bidirectional=True,
+            helmholtzTimeout=0.5,
+            helmholtzEvaluationTimeout=0.25)
 
 
 def train_necessary(t):

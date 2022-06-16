@@ -12,12 +12,13 @@ from token import COMMENT as TOKEN_TYPE_COMMENT
 import f_file as functions
 
 FUNCTIONS_FILE = "f_file.py"
-DATASET_NAME = "list_20"
-DATA_SIZE = 20
+DATA_SIZE = 100
+OUTPUT_FOLDER_NAME = "_list"
+DATASET_NAME = f"list_{DATA_SIZE}"
 EXAMPLES_PER_TASK = 30
 SEED = 1984
 MIN_LIST_LENGTH = 2
-MAX_LIST_LENGTH = 5
+MAX_LIST_LENGTH = 9
 INT_DEFINITION_SPACE = range(100)
 BOOL_DEFINITION_SPACE = [True, False]
 
@@ -25,10 +26,10 @@ BOOL_DEFINITION_SPACE = [True, False]
 
 function_list = getmembers(functions, isfunction)
 
-train_data_path = "data/tasks/" + DATASET_NAME + "/train"
-train_language_data_path = "data/language/" + DATASET_NAME + "/train"
-test_data_path = "data/tasks/" + DATASET_NAME + "/test"
-test_language_data_path = "data/language/" + DATASET_NAME + "/test"
+train_data_path = f"{OUTPUT_FOLDER_NAME}/tasks/{DATASET_NAME}/train"
+train_language_data_path = f"{OUTPUT_FOLDER_NAME}/language/{DATASET_NAME}/train"
+test_data_path = f"{OUTPUT_FOLDER_NAME}/tasks/{DATASET_NAME}/test"
+test_language_data_path = f"{OUTPUT_FOLDER_NAME}/language/{DATASET_NAME}/test"
 for path in [
     train_data_path,
     train_language_data_path,
