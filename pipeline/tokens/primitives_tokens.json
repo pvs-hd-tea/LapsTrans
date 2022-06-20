@@ -1,0 +1,17 @@
+
+{ 
+    "++" : ["<variable>++", "<variable> += 1", "<variable> = <variable> + 1"],
+    "--" : ["<variable>--", "<variable> -= 1", "<variable> = <variable> - 1"],
+    "append" : ["<variable1>.append(<variable2>)", "<variable1> +[<variable2>]"],
+    "remove" : ["<variable1>.remove(<variable2>)", "<variable1> +[<variable2>]"],
+    "concatenate" : ["<variable1> + <variable2>", "<variable1>.extend(<variable2>)"]
+
+}
+
+
+
+
+
+
+
+
