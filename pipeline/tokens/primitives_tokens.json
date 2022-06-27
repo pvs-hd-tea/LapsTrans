@@ -1,17 +1,21 @@
-
-{ 
-    "++" : ["<variable>++", "<variable> += 1", "<variable> = <variable> + 1"],
-    "--" : ["<variable>--", "<variable> -= 1", "<variable> = <variable> - 1"],
-    "append" : ["<variable1>.append(<variable2>)", "<variable1> +[<variable2>]"],
-    "remove" : ["<variable1>.remove(<variable2>)", "<variable1> +[<variable2>]"],
-    "concatenate" : ["<variable1> + <variable2>", "<variable1>.extend(<variable2>)"]
-
+{
+    "++": [
+        "<variable0> += 1",
+        "<variable0> = <variable0> + 1"
+    ],
+    "--": [
+        "<variable0> -= 1",
+        "<variable0> = <variable0> - 1"
+    ],
+    "append": [
+        "<variable0>.append(<variable1>)",
+        "<variable0> + [<variable1>]"
+    ],
+    "remove": [
+        "<variable0>.remove(<variable1>)"
+    ],
+    "concatenate": [
+        "<variable0> + <variable1>",
+        "<variable0>.extend(<variable1>)"
+    ]
 }
-
-
-
-
-
-
-
-

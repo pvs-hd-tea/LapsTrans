@@ -1,16 +1,13 @@
 from inspect import getsource, getmembers, isfunction
-import json
 import random
-from pathlib import Path
 import re
 
 # Parameters
 
 # replace f_file with the name of .py file containing functions
-import f_file as functions
+import generated_functions as functions
 
-FUNCTIONS_FILE = "f_file.py"
-DATASET_NAME = "list_20"
+FUNCTIONS_FILE = "generated_functions.py"
 DATA_SIZE = 20
 EXAMPLES_PER_TASK = 30
 SEED = 1984
@@ -23,24 +20,11 @@ BOOL_DEFINITION_SPACE = [True, False]
 
 function_list = getmembers(functions, isfunction)
 
-train_data_path = "data/tasks/" + DATASET_NAME + "/train"
-train_language_data_path = "data/language/" + DATASET_NAME + "/train"
-test_data_path = "data/tasks/" + DATASET_NAME + "/test"
-test_language_data_path = "data/language/" + DATASET_NAME + "/test"
-for path in [
-    train_data_path,
-    train_language_data_path,
-    test_data_path,
-    test_language_data_path,
-]:
-    Path(path).mkdir(parents=True, exist_ok=True)
 
 random.seed(SEED)
 task_names_iterators = {}
 
 # Core
-
-
 def random_list_int():
     list_len = random.randint(MIN_LIST_LENGTH, MAX_LIST_LENGTH)
     return random.choices(INT_DEFINITION_SPACE, k=list_len)
@@ -103,19 +87,3 @@ def generate_data():
 
     return examples_data, language_data, vocab_data
 
-
-train_data, train_language, train_vocab = generate_data()
-with open(train_data_path + "/tasks.json", "w") as outfile:
-    json.dump(train_data, outfile)
-with open(train_language_data_path + "/language.json", "w") as outfile:
-    json.dump(train_language, outfile)
-with open(train_language_data_path + "/vocab.json", "w") as outfile:
-    json.dump(train_vocab, outfile)
-
-test_data, test_language, test_vocab = generate_data()
-with open(test_data_path + "/tasks.json", "w") as outfile:
-    json.dump(test_data, outfile)
-with open(test_language_data_path + "/language.json", "w") as outfile:
-    json.dump(test_language, outfile)
-with open(test_language_data_path + "/vocab.json", "w") as outfile:
-    json.dump(test_vocab, outfile)

@@ -1,0 +1,11 @@
+def {{ w.increment }}_{{ v.i }}({{ v.i }}):
+    # int -> int #
+    {{ o.++ {{ v.i }} }}
+    return {{ v.i }}
+
+###### 
+
+def {{ w.decrement }}_{{ v.number }}({{ v.number }}):
+    # int -> int #
+    {{ o.-- {{ v.number }} }}
+    return {{ v.number }}

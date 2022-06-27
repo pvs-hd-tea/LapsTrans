@@ -1,10 +1,38 @@
 {
-    "i" : ["i", "k", "index", "counter"],
-    "v" : ["var", "variable", "v"],
-    "t" : ["tem", "temp", "t"],
-    "list" : ["l", "list"],
-    "number" : ["number", "num", "n"],
-    "object" : ["object",  "obj", "o"],
-    "accu" : ["accumulated", "accu", "summed"]
+    "i": [
+        "i",
+        "k",
+        "index",
+        "counter",
+        "increment"
+    ],
+    "v": [
+        "var",
+        "variable",
+        "v"
+    ],
+    "t": [
+        "tem",
+        "temp",
+        "t"
+    ],
+    "list": [
+        "l",
+        "list"
+    ],
+    "number": [
+        "number",
+        "num",
+        "n"
+    ],
+    "object": [
+        "object",
+        "obj",
+        "o"
+    ],
+    "accu": [
+        "accumulated",
+        "accu",
+        "summed"
+    ]
 }
-
