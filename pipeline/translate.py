@@ -44,6 +44,7 @@ laps_command = [
     "bin/list.py",
     "--resume",
     CHECKPOINT_PATH,
+    "--taskDataset",
     DATASET_NAME,
     "--translate"
 ]
