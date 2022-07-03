@@ -48,4 +48,6 @@ laps_command = [
     "--translate"
 ]
 
-subprocess.run(laps_command, capture_output=True, text=True, cwd='./ec/')
+with open("./ec/translate.sh", "w") as sh:
+    string = " ".join(laps_command)
+    sh.write(string)
