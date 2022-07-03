@@ -14,6 +14,7 @@ from dreamcoder.parser import *
 from dreamcoder.languageUtilities import *
 from dreamcoder.translation import *
 from lapstrans_extensions.code_tokenizer import tokenize_codestring
+from lapstrans_extensions.translation_callback import write_translations
 
 class ECResult():
     def __init__(self, _=None,
@@ -232,7 +233,8 @@ def ecIterator(grammar, tasks,
                test_sleep_recognition_0=False, # Integration test for the examples-only recognizer.
                test_sleep_recognition_1=False, # Integration test for the language-based recognizer.
                test_next_iteration_settings=False, # Integration test for the second iteration.
-               use_code_tokenizer=False
+               code_tokenizer=False,
+               lapstrans_translate=False
                ):
     if enumerationTimeout is None:
         eprint(
@@ -621,6 +623,8 @@ def ecIterator(grammar, tasks,
                                                       CPUs=CPUs,
                                                       evaluationTimeout=evaluationTimeout,
                                                       max_mem_per_enumeration_thread=max_mem_per_enumeration_thread)
+            if lapstrans_translate:
+                write_translations(topDownFrontiers)
             result.trainSearchTime = {t: tm for t, tm in times.items() if tm is not None}
         else:
             eprint("Skipping top-down enumeration because we are not using the generative model")
@@ -704,7 +708,7 @@ def ecIterator(grammar, tasks,
             if all( f.empty for f in result.allFrontiers.values() ):
                 eprint("No non-empty frontiers to train a translation model, skipping.")
             else:
-                tokenizer_fn = None if not use_code_tokenizer else tokenize_codestring
+                tokenizer_fn = None if not code_tokenizer else tokenize_codestring
                 translation_info = induce_synchronous_grammar(frontiers=result.allFrontiers.values(),
                                 tasks=tasks, testingTasks=testingTasks, tasksAttempted=result.tasksAttempted,
                                 grammar=grammar, 
@@ -1569,8 +1573,12 @@ def commandlineArguments(_=None,
                         default='loglinear',
                         type=str)              
     parser.add_argument("--useCodeTokenizer",
-                        dest="use_code_tokenizer",
+                        dest="code_tokenizer",
                         help="Use code tokenizer instead of NL tokenizer on the task descriptions",
+                        action='store_true')
+    parser.add_argument("--translate",
+                        dest="lapstrans_translate",
+                        help="Run in translate mode, whereby if every task is solved, the program writes them into json file and terminates",
                         action='store_true')
     parser.set_defaults(recognition_0=recognition_0,
                         useDSL=True,
