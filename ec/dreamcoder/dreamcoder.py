@@ -374,7 +374,9 @@ def ecIterator(grammar, tasks,
             "n_models",
             "test_dsl_only",
             "initialTimeout",
-            "initialTimeoutIterations"
+            "initialTimeoutIterations",
+            "code_tokenizer",
+            "lapstrans_translate"
         ]
         parameters["iterations"] = iteration
         checkpoint_params = [k for k in sorted(parameters.keys()) if k not in exclude_from_path and not k.startswith('test_')]
