@@ -46,7 +46,8 @@ laps_command = [
     CHECKPOINT_PATH,
     "--taskDataset",
     DATASET_NAME,
-    "--translate"
+    "--translate",
+    "--no-cuda"
 ]
 
 with open("./ec/translate.sh", "w") as sh:

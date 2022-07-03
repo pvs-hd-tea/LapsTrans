@@ -1,11 +1,3 @@
-def reverse(inp):
-    # list-of-int -> list-of-int #
-    return list(reversed(inp))
-
-def mirror(inp):
-    # list-of-int -> list-of-int #
-    return inp + list(reversed(inp))
-
 def decrement(inp):
     # list-of-int -> list-of-int #
     return [each - 1 for each in inp]
