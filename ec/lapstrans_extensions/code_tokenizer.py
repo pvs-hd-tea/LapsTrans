@@ -1,4 +1,6 @@
 import tokenize
+from token import COMMENT as TOKEN_TYPE_COMMENT
+NEWLINE_SYMBOL = "NEWLINE_SYMBOL"
 
 class FauxStream:
     """
@@ -17,9 +19,23 @@ class FauxStream:
         return tmp
 
 def tokenize_codestring(string):
+    string = string.replace("\n", f" {NEWLINE_SYMBOL}")
     f = FauxStream(string)
     token_objs = list(tokenize.tokenize(f.pop))
-    token_words = [token.string for token in token_objs]
+
+    token_strings = []
+    for each in token_objs:
+        # The second token type is to filter out multiline """ comments """
+        # might have sideeffects of removing actual strings
+        # should not matter for string domain
+        if each.exact_type == TOKEN_TYPE_COMMENT:
+            comment_string = each.string
+            comment_string.replace(",","")
+            comment_string.replace(".","")
+            comment_string.replace("#","")
+            token_strings.extend(comment_string.split(' '))
+        else:
+            token_strings.append(each.string)
+    
     # Remove 'utf-8' from beginning of every tokenset, and '' from the end.
-    token_words = token_words[1:-1]
-    return token_words
+    return token_strings[1:-1]
