@@ -25,9 +25,9 @@ tasks, language, vocab = p.generate_data_strict()
 
 with open(train_data_path + "/tasks.json", "w") as outfile:
     json.dump(tasks, outfile)
-with open(train_data_path + "/language.json", "w") as outfile:
+with open(train_language_data_path + "/language.json", "w") as outfile:
     json.dump(language, outfile)
-with open(train_data_path + "/vocab.json", "w") as outfile:
+with open(train_language_data_path + "/vocab.json", "w") as outfile:
     json.dump(vocab, outfile)
 
 with open(test_data_path + "/tasks.json", "w") as outfile:
@@ -46,6 +46,8 @@ laps_command = [
     CHECKPOINT_PATH,
     "--taskDataset",
     DATASET_NAME,
+    "--iterations",
+    "100",
     "--translate",
     "--no-cuda"
 ]

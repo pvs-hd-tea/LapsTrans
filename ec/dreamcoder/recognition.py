@@ -1571,7 +1571,10 @@ class RecurrentFeatureExtractor(nn.Module):
                     continue # Try searching for more inputs on which we can run.
 
         else:
-            candidateInputs = list(self.requestToInputs[tp])
+            try:
+                candidateInputs = list(self.requestToInputs[tp])
+            except KeyError as e:
+                return None
             random.shuffle(candidateInputs)
             for xss in candidateInputs:
                 ys = []

@@ -5,7 +5,7 @@ import random
 import re
 
 # Parameters
-DATA_SIZE = 20
+DATA_SIZE = 200
 EXAMPLES_PER_TASK = 30
 MIN_LIST_LENGTH = 2
 MAX_LIST_LENGTH = 5

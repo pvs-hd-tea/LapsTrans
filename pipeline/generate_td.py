@@ -3,7 +3,7 @@ from pathlib import Path
 from pipeline import Pipeline
 
 OUTPUT_PATH = "./ec/data/list"
-DATASET_NAME = "list_20"
+DATASET_NAME = "list_200"
 
 train_data_path = f"{OUTPUT_PATH}/tasks/{DATASET_NAME}/train"
 train_language_data_path = f"{OUTPUT_PATH}/language/{DATASET_NAME}/train"
@@ -17,7 +17,7 @@ for path in [
 ]:
     Path(path).mkdir(parents=True, exist_ok=True)
 
-p = Pipeline("pipeline/f_file.py")
+p = Pipeline("pipeline/functions.py")
 tasks, language, vocab = p.generate_data_shuffled()
 
 with open(train_data_path + "/tasks.json", "w") as outfile:
@@ -26,6 +26,9 @@ with open(train_language_data_path + "/language.json", "w") as outfile:
     json.dump(language, outfile)
 with open(train_language_data_path + "/vocab.json", "w") as outfile:
     json.dump(vocab, outfile)
+
+p = Pipeline("pipeline/functions.py", seed=1985)
+tasks, language, vocab = p.generate_data_shuffled()
 
 with open(test_data_path + "/tasks.json", "w") as outfile:
     json.dump(tasks, outfile)
