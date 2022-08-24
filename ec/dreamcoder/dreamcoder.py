@@ -13,8 +13,8 @@ from dreamcoder.dreaming import backgroundHelmholtzEnumeration
 from dreamcoder.parser import *
 from dreamcoder.languageUtilities import *
 from dreamcoder.translation import *
-from lapstrans_extensions.code_tokenizer import tokenize_codestring
-from lapstrans_extensions.translation_callback import write_translations
+from lapstrans_extensions.laps_augmentations.code_tokenizer import tokenize_codestring
+from lapstrans_extensions.laps_augmentations.translation_callback import write_translations
 
 class ECResult():
     def __init__(self, _=None,

@@ -1,0 +1,1 @@
+{"maximize00": "def maximize(inp):\n    return [max(inp)] * len(inp)\n", "maximize01": "def maximize(inp):\n    return [max(inp)] * len(inp)\n"}
