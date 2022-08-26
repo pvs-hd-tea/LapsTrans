@@ -20,6 +20,8 @@ parser.add_argument('--examples_per_task', type=int,
                     help='Number of input-output tuples per task in training data. Default: 30', default=30)
 parser.add_argument('--data_size', type=int,
                     help='The size of the training dataset generated. Default: 500', default=500)
+parser.add_argument('--tab_length', type=int,
+                    help='Length of tabs in spaces in source code. Default: 4', default=4)
 
 args = parser.parse_known_args()[0]
 
@@ -40,7 +42,7 @@ for path in [
     Path(path).mkdir(parents=True, exist_ok=True)
 
 p = Pipeline(args.filepath, args.seed, args.data_size,
-             args.examples_per_task, args.min_list_length, args.max_list_length)
+             args.examples_per_task, args.min_list_length, args.max_list_length, args.tab_length)
 tasks, language, vocab = p.generate_data_strict()
 
 with open(train_data_path + "/tasks.json", "w") as outfile:
@@ -61,7 +63,7 @@ print('Solved tasks are written to the data folder.\n')
 
 laps_command = [
     "python3",
-    "ec/bin/list.py",
+    "bin/list.py",
     "--resume",
     CHECKPOINT_PATH,
     "--taskDataset",
@@ -74,4 +76,6 @@ laps_command = [
 
 laps_command = ' '.join(laps_command)
 
-stream = os.popen(laps_command)
+process = os.popen(laps_command)
+for line in process.readlines():
+    pass

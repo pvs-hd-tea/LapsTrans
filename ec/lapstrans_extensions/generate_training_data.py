@@ -20,6 +20,8 @@ parser.add_argument('--examples_per_task', type=int,
                     help='Number of input-output tuples per task in training data. Defaults to 30. Default: 30', default=30)
 parser.add_argument('--data_size', type=int,
                     help='The size of the training dataset generated. Default: 500', default=500)
+parser.add_argument('--tab_length', type=int,
+                    help='Length of tabs in spaces in source code. Default: 4', default=4)
 
 args = parser.parse_args()
 
@@ -39,7 +41,7 @@ for path in [
     Path(path).mkdir(parents=True, exist_ok=True)
 
 p = Pipeline(args.datapath, args.seed, args.data_size,
-             args.examples_per_task, args.min_list_length, args.max_list_length)
+             args.examples_per_task, args.min_list_length, args.max_list_length, args.tab_length)
 tasks, language, vocab = p.generate_data_shuffled()
 
 with open(train_data_path + "/tasks.json", "w") as outfile:
@@ -50,7 +52,7 @@ with open(train_language_data_path + "/vocab.json", "w") as outfile:
     json.dump(vocab, outfile)
 
 p = Pipeline(args.datapath, args.seed+1, args.data_size,
-             args.examples_per_task, args.min_list_length, args.max_list_length)
+             args.examples_per_task, args.min_list_length, args.max_list_length, args.tab_length)
 tasks, language, vocab = p.generate_data_shuffled()
 
 with open(test_data_path + "/tasks.json", "w") as outfile:

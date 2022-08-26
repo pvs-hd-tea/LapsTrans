@@ -8,9 +8,10 @@ import tokenize
 from typing import Dict, List, Tuple
 
 # Parameters
-INT_DEFINITION_SPACE = range(100)
+INT_DEFINITION_SPACE = range(-20, 20)
 BOOL_DEFINITION_SPACE = [True, False]
 NEWLINE_SYMBOL = "NEWLINE_SYMBOL"
+TAB_SYMBOL = "TAB_SYMBOL"
 
 INT_TYPE = 'int'
 BOOL_TYPE = 'bool'
@@ -18,6 +19,12 @@ INT_LIST_TYPE = 'list-of-int'
 BOOL_LIST_TYPE = 'list-of-bool'
 EMPTY_LIST = 'empty_list'
 
+
+def soft_remove(l, v):
+    try:
+        l.remove(v)
+    except ValueError:
+        pass
 
 class Pipeline:
     """
@@ -28,11 +35,12 @@ class Pipeline:
     generate_data_strict()
     """
 
-    def __init__(self, location, seed, data_size, examples_per_task, min_list_length, max_list_length):
+    def __init__(self, location, seed, data_size, examples_per_task, min_list_length, max_list_length, tab_length):
         self.DATA_SIZE = data_size
         self.EXAMPLES_PER_TASK = examples_per_task
         self.MIN_LIST_LENGTH = min_list_length
         self.MAX_LIST_LENGTH = max_list_length
+        self.TAB_LENGTH = tab_length
         print("Loading functions from {}".format(location))
         self.location = location
 
@@ -61,7 +69,7 @@ class Pipeline:
     def _random_bool(self):
         return random.choice(BOOL_DEFINITION_SPACE)
 
-    def _generate_vocab(filename):
+    def _generate_vocab(self, filename):
         """Generates vocabulary data for language model.
 
         Args:
@@ -79,6 +87,7 @@ class Pipeline:
                     comment_string.replace(",", "")
                     comment_string.replace(".", "")
                     comment_string.replace("\n", NEWLINE_SYMBOL)
+                    comment_string.replace("\t", TAB_SYMBOL)
                     comment_string.replace("#", "")
                     comments_tokenized.extend(comment_string.split(' '))
             unique_comments_tokenized = {each for each in comments_tokenized}
@@ -89,11 +98,15 @@ class Pipeline:
 
             unique_token_names = {token.string for token in token_objs}
         result = list(unique_token_names) + \
-            list(unique_comments_tokenized) + [NEWLINE_SYMBOL]
+            list(unique_comments_tokenized) + [NEWLINE_SYMBOL, TAB_SYMBOL]
         result = list(set(result))
-        result.remove("")
-        result.remove('utf-8')
-        result.remove('\n')
+        soft_remove(result, "")
+        soft_remove(result, "utf-8")
+        soft_remove(result, "\n")
+        soft_remove(result, "\t")
+        tab = ' ' * self.TAB_LENGTH
+        for i in range(10):
+            soft_remove(result, i*tab)
         return result
 
     _type_def_to_sample = {
@@ -113,6 +126,7 @@ class Pipeline:
             self.task_names_iterators[function_name] = -1
         self.task_names_iterators[function_name] += 1
         source_code = getsource(function)
+        source_code = source_code.replace(self.TAB_LENGTH * ' ', '\t')
         types = Pipeline.identify_types(function)
         type_iter = 0
         example_set = []
@@ -131,7 +145,7 @@ class Pipeline:
                 "examples": examples,
             }
             example_set.append(example)
-            language_set.update({task_name: source_code})
+            language_set.update({task_name: [source_code]})
             type_iter += 1
         return example_set, language_set
 
@@ -151,7 +165,7 @@ class Pipeline:
             examples_data.extend(example_set)
             language_data.update(language_set)
 
-        vocab_data = Pipeline._generate_vocab(self.location)
+        vocab_data = self._generate_vocab(self.location)
         return examples_data, language_data, vocab_data
 
     def generate_data_strict(self):
@@ -164,7 +178,7 @@ class Pipeline:
             examples_data.extend(example_set)
             language_data.update(language_set)
 
-        vocab_data = Pipeline._generate_vocab(self.location)
+        vocab_data = self._generate_vocab(self.location)
         return examples_data, language_data, vocab_data
 
     def _infer_instance_type(instance) -> str:
@@ -190,7 +204,8 @@ class Pipeline:
             return INT_TYPE
         if isinstance(instance, list):
             if len(instance) == 0:
-                return EMPTY_LIST
+                # return EMPTY_LIST
+                raise NotImplementedError
             if isinstance(instance[0], bool):
                 return BOOL_LIST_TYPE
             if isinstance(instance[0], int):

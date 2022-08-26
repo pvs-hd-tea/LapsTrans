@@ -1,6 +1,6 @@
 import json
 
-WRITE_TO = "../pipeline/translation.json"
+WRITE_TO = "translation.json"
 
 def write_translations(frontiers):
     translated = {}
