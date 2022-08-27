@@ -1,0 +1,9 @@
+{ 
+    "increment" : ["increment", "next", "increase", "add_one"],
+    "decrement" : ["decrement", "previous", "decrease", "subtract_one"],
+    "sum" : ["sum_all", "add_all", "summation"],
+    "append" : ["append", "add_element", "insert_to_tail"],
+    "remove" : ["remove", "delete_element", "delete_el"],
+    "len" : ["lenght", "len"],
+    "concatenate" : ["connect", "join", "concatenate", "combine_two"]
+}
