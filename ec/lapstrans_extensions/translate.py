@@ -1,5 +1,5 @@
 import os
-from configuration import translate_py_arguments
+from lapstrans_extensions.utils.configuration import translate_py_arguments
 from pipeline.pipeline import Pipeline
 from pathlib import Path
 import json
@@ -77,6 +77,8 @@ laps_command = [
     DATASET_NAME,
     "--iterations",
     "100",
+    "--enumerationTimeout",
+    "30",
     "--translate",
     "--no-cuda",
     "--Helmholtz",
@@ -88,4 +90,4 @@ laps_command = ' '.join(laps_command)
 process = os.popen(laps_command)
 for line in process.readlines():
     pass
-print("Translation attempt finished, the results are accessible at lapstrans_extensions/working_dit/translation.json")
+print("Translation attempt finished, the results are accessible at lapstrans_extensions/working_dir/translation.json")

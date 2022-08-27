@@ -20,7 +20,13 @@ BOOL_LIST_TYPE = 'list-of-bool'
 EMPTY_LIST = 'empty_list'
 
 
-def soft_remove(l, v):
+def soft_remove(l: List, v: Any) -> None:
+    """Attempts to remove a value from the list in place, but does not raise an exception if value is not there
+
+    Args:
+        l (List): muteable list
+        v (Any): value to remove
+    """
     try:
         l.remove(v)
     except ValueError:
@@ -29,6 +35,12 @@ def soft_remove(l, v):
 
 def is_identity_mapping(examples: List[Dict[str, Any]]) -> bool:
     """Checks if "i" and "o" in ALL tuples in examples match
+
+    Args:
+        examples (List[Dict[str, Any]]): examples generated within Pipeline.process_a_function() in a dreamcoder's solved examples format
+
+    Returns:
+        bool
     """
     match = True
     for each in examples:
@@ -38,15 +50,27 @@ def is_identity_mapping(examples: List[Dict[str, Any]]) -> bool:
 
 class Pipeline:
     """
-    Handles generation of training data from a file path.
+    Handles generation of training data from a given file path.
     Two functions you may be interested in are 
     generate_data_shuffled()
     and
     generate_data_strict()
     """
 
-    def __init__(self, input_path=None, seed=None, data_size=None, examples_per_task=None, min_list_length=None, max_list_length=None, tab_length=None):
+    def __init__(self, input_path: str = None, seed: int = None, data_size: int = None, examples_per_task: int = None, min_list_length: int = None, max_list_length: int = None, tab_length: int = None) -> None:
+        """
+        Args:
+            input_path (str): The path to the input file containing functions used to generated examples and language.
+            seed (int, optional): Seed used in random number generator. Defaults to 1984.
+            data_size (int): The size of the training dataset. Only required if using Pipeline to generate training data.
+            examples_per_task (int): Number of examples (i.e. input-output tuples per each task).
+            min_list_length (int): Minimum length of an input list in every example.
+            max_list_length (int): Maximum length of an input list in every example.
+            tab_length (int): The length of indentation (if, as per PEP8, spaces are used for indentation).
 
+        Raises:
+            ValueError: If required argument is missed.
+        """
         if input_path is None:
             raise ValueError('Pipeline requires input file path')
         if examples_per_task is None:
@@ -80,11 +104,21 @@ class Pipeline:
         self.task_names_iterators = {}
 
     # Core
-    def _random_list_int(self):
+    def _random_list_int(self) -> List[int]:
+        """List of random integers.
+
+        Returns:
+            List[int]
+        """
         list_len = random.randint(self.MIN_LIST_LENGTH, self.MAX_LIST_LENGTH)
         return random.choices(INT_DEFINITION_SPACE, k=list_len)
 
-    def _random_list_bool(self):
+    def _random_list_bool(self) -> List[bool]:
+        """List of random booleans.
+
+        Returns:
+            List[bool]
+        """
         list_len = random.randint(self.MIN_LIST_LENGTH, self.MAX_LIST_LENGTH)
         return random.choices(BOOL_DEFINITION_SPACE, k=list_len)
 
@@ -94,16 +128,13 @@ class Pipeline:
     def _random_bool(self):
         return random.choice(BOOL_DEFINITION_SPACE)
 
-    def _generate_vocab(self, filename):
+    def _generate_vocab(self):
         """Generates vocabulary data for language model.
-
-        Args:
-            filename (str): File from which we extracted all the functions
 
         Returns:
             List: Vocabulary data.
         """
-        with open(filename, 'rb') as byte_stream:
+        with open(self.location, 'rb') as byte_stream:
             token_objs = list(tokenize.tokenize(byte_stream.readline))
             comments_tokenized = []
             for each in token_objs:
@@ -207,7 +238,7 @@ class Pipeline:
             examples_data.extend(example_set)
             language_data.update(language_set)
 
-        vocab_data = self._generate_vocab(self.location)
+        vocab_data = self._generate_vocab()
         return examples_data, language_data, vocab_data
 
     def generate_data_strict(self):
@@ -220,7 +251,7 @@ class Pipeline:
             examples_data.extend(example_set)
             language_data.update(language_set)
 
-        vocab_data = self._generate_vocab(self.location)
+        vocab_data = self._generate_vocab()
         return examples_data, language_data, vocab_data
 
     def _infer_instance_type(instance) -> str:
