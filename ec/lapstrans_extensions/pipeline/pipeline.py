@@ -5,10 +5,10 @@ import random
 import re
 from token import COMMENT as TOKEN_TYPE_COMMENT
 import tokenize
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple
 
 # Parameters
-INT_DEFINITION_SPACE = range(-20, 20)
+INT_DEFINITION_SPACE = range(-10, 10)
 BOOL_DEFINITION_SPACE = [True, False]
 NEWLINE_SYMBOL = "NEWLINE_SYMBOL"
 TAB_SYMBOL = "TAB_SYMBOL"
@@ -26,6 +26,16 @@ def soft_remove(l, v):
     except ValueError:
         pass
 
+
+def is_identity_mapping(examples: List[Dict[str, Any]]) -> bool:
+    """Checks if "i" and "o" in ALL tuples in examples match
+    """
+    match = True
+    for each in examples:
+        match = match and (each["i"] == each["o"])
+    return match
+
+
 class Pipeline:
     """
     Handles generation of training data from a file path.
@@ -35,16 +45,31 @@ class Pipeline:
     generate_data_strict()
     """
 
-    def __init__(self, location, seed, data_size, examples_per_task, min_list_length, max_list_length, tab_length):
+    def __init__(self, input_path=None, seed=None, data_size=None, examples_per_task=None, min_list_length=None, max_list_length=None, tab_length=None):
+
+        if input_path is None:
+            raise ValueError('Pipeline requires input file path')
+        if examples_per_task is None:
+            raise ValueError(
+                'Number of examples per task is not set. Did you specify default value?')
+        if min_list_length is None:
+            raise ValueError(
+                'Minimum list length for input is not set. Did you specify default value?')
+        if max_list_length is None:
+            raise ValueError(
+                'Maximum list length for input is not set. Did you specify default value?')
+        if seed is None:
+            seed = 1984
+
         self.DATA_SIZE = data_size
         self.EXAMPLES_PER_TASK = examples_per_task
         self.MIN_LIST_LENGTH = min_list_length
         self.MAX_LIST_LENGTH = max_list_length
         self.TAB_LENGTH = tab_length
-        print("Loading functions from {}".format(location))
-        self.location = location
+        print("Loading functions from {}".format(input_path))
+        self.location = input_path
 
-        spec = importlib.util.spec_from_file_location("functions", location)
+        spec = importlib.util.spec_from_file_location("functions", input_path)
         functions = importlib.util.module_from_spec(spec)
         sys.modules["functions"] = functions
         spec.loader.exec_module(functions)
@@ -135,16 +160,30 @@ class Pipeline:
             task_name = function_name + \
                 str(self.task_names_iterators[function_name]) + str(type_iter)
             examples = []
-            for _ in range(self.EXAMPLES_PER_TASK):
-                input = self._type_def_to_sample[input_type](self)
-                output = function(input)
-                examples.append({"i": input, "o": output})
-            example = {
+            done = False
+            while not done:
+                for _ in range(self.EXAMPLES_PER_TASK):
+                    input = self._type_def_to_sample[input_type](self)
+                    output = function(input)
+                    examples.append({"i": input, "o": output})
+                if is_identity_mapping(examples):
+                    # If it's identity mapping, but data type is boolean, probably we just unnecessary identified that the function can accept booleans
+                    if input_type == BOOL_LIST_TYPE or input_type == BOOL_TYPE:
+                        examples = None
+                        done = True
+                    # If it's identity mapping, but data type is not boolean, regenerate data
+                    else:
+                        done = False
+                else:
+                    done = True
+            if not examples:
+                continue
+            processed_data_for_function = {
                 "type": {"input": input_type, "output": output_type},
                 "name": task_name,
                 "examples": examples,
             }
-            example_set.append(example)
+            example_set.append(processed_data_for_function)
             language_set.update({task_name: [source_code]})
             type_iter += 1
         return example_set, language_set
@@ -155,6 +194,9 @@ class Pipeline:
         Returns:
             List, Dict, List: List of examples, language annotation for all examples, vocabulary data for language mode
         """
+        if self.DATA_SIZE is None:
+            raise ValueError(
+                "Can not generate training data without specifying target size of it.")
         examples_data = []
         language_data = {}
 

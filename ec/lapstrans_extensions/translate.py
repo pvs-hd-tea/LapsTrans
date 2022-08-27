@@ -1,29 +1,36 @@
 import os
-import argparse
+from configuration import translate_py_arguments
 from pipeline.pipeline import Pipeline
 from pathlib import Path
 import json
 
-parser = argparse.ArgumentParser(
-    description='Translate python code into lisp using LAPS/Dreamcoder')
-parser.add_argument(
-    '-f', '--filepath', help='Path of the file with functions to translate.', type=str, required=True)
-parser.add_argument('-c', '--checkpoint_path',
-                    help='Path of the .pickle file with trained model.', type=str, default="smart.pickle")
-parser.add_argument('-s', '--seed', type=int,
-                    help='Random generator seed.', default=1984)
-parser.add_argument('--min_list_length', type=int,
-                    help='Minimal list length to be used in input data generation. Default: 2', default=2)
-parser.add_argument('--max_list_length', type=int,
-                    help='Maximum list length to be used in input data generation. Default: 5', default=5)
-parser.add_argument('--examples_per_task', type=int,
-                    help='Number of input-output tuples per task in training data. Default: 30', default=30)
-parser.add_argument('--data_size', type=int,
-                    help='The size of the training dataset generated. Default: 500', default=500)
-parser.add_argument('--tab_length', type=int,
-                    help='Length of tabs in spaces in source code. Default: 4', default=4)
+TMP_INPUT_FILE = "lapstrans_extensions/working_dir/cli_input.py"
+args = translate_py_arguments()
+try:
+    cli = args.cli
+except:
+    cli = False
 
-args = parser.parse_known_args()[0]
+# Resolve input
+if cli:
+    input_file = TMP_INPUT_FILE
+    print("Running with --cli parameter, please enter the function to translate.\n")
+    with open(input_file, "w") as f:
+        recording = True
+        one_stop = True
+        while recording:
+            line = input()
+            f.write(line)
+            if line == '':
+                if one_stop:
+                    recording = False
+                else:
+                    one_stop = True
+                    print('Define next function, or press ENTER again to finish.\n')
+            else:
+                one_stop = False
+else:
+    input_file = args.input_path
 
 CHECKPOINT_PATH = args.checkpoint_path
 OUTPUT_PATH = "./data/list"
@@ -41,8 +48,8 @@ for path in [
 ]:
     Path(path).mkdir(parents=True, exist_ok=True)
 
-p = Pipeline(args.filepath, args.seed, args.data_size,
-             args.examples_per_task, args.min_list_length, args.max_list_length, args.tab_length)
+p = Pipeline(input_path=input_file, seed=args.seed,
+             examples_per_task=args.examples_per_task, min_list_length=args.min_list_length, max_list_length=args.max_list_length, tab_length=args.tab_length)
 tasks, language, vocab = p.generate_data_strict()
 
 with open(train_data_path + "/tasks.json", "w") as outfile:
@@ -62,7 +69,7 @@ with open(test_language_data_path + "/vocab.json", "w") as outfile:
 print('Solved tasks are written to the data folder.\n')
 
 laps_command = [
-    "python3",
+    "python3.7",
     "bin/list.py",
     "--resume",
     CHECKPOINT_PATH,
@@ -71,7 +78,9 @@ laps_command = [
     "--iterations",
     "100",
     "--translate",
-    "--no-cuda"
+    "--no-cuda",
+    "--Helmholtz",
+    "0"
 ]
 
 laps_command = ' '.join(laps_command)
@@ -79,3 +88,4 @@ laps_command = ' '.join(laps_command)
 process = os.popen(laps_command)
 for line in process.readlines():
     pass
+print("Translation attempt finished, the results are accessible at lapstrans_extensions/working_dit/translation.json")

@@ -14,6 +14,6 @@ if __name__ == '__main__':
         enumerationTimeout=10, activation='tanh', iterations=10, recognitionTimeout=3600,
         a=3, maximumFrontier=10, topK=2, pseudoCounts=30.0,
         helmholtzRatio=0.5, structurePenalty=1.,
-        CPUs=numberOfCPUs(),
+        CPUs=numberOfCPUs(), cuda=False,
         extras=list_options)
     main(args)
