@@ -54,15 +54,15 @@ def test_args_from_config_section():
 
 
 def test_translate_py_arguments():
-    t = translate_py_arguments()
+    t = translate_py_arguments().parse_args(['--cli'])
     assert t.seed
-    assert not t.cli
+    assert t.cli
     with raises(AttributeError):
         t.output_path
 
 
 def test_generate_td_py_arguments():
-    t = generate_td_py_arguments()
+    t = generate_td_py_arguments().parse_args([])
     assert t.output_path == './data/list'
     with raises(AttributeError):
         t.cli

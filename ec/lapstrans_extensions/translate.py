@@ -1,21 +1,31 @@
+from argparse import ArgumentError
 import os
-from utils.configuration import translate_py_arguments
+from utils.configuration import Storage, args_from_config, translate_py_arguments
 from pipeline.pipeline import Pipeline
 from pathlib import Path
 import json
 
 TMP_INPUT_FILE = "lapstrans_extensions/working_dir/cli_input.py"
-args = translate_py_arguments()
+args = translate_py_arguments().parse_known_args()[0]
+
+parameters = Storage()
+
 try:
-    cli = args.cli
-except:
-    cli = False
+    configuration_path = args.config
+    parameters: Storage = args_from_config(configuration_path, 'TRANSLATE')
+except AttributeError:
+    pass
+
+# Override with arguments
+for k, v in args.__dict__.items():
+    parameters.__setattr__(k, v)
+
 
 # Resolve input
-if cli:
-    input_file = TMP_INPUT_FILE
+if parameters.cli:
+    parameters.input_file = TMP_INPUT_FILE
     print("Running with --cli parameter, please enter the function to translate.\n")
-    with open(input_file, "w") as f:
+    with open(parameters.input_file, "w") as f:
         recording = True
         one_stop = True
         while recording:
@@ -30,9 +40,9 @@ if cli:
             else:
                 one_stop = False
 else:
-    input_file = args.input_path
+    input_file = parameters.input_path
 
-CHECKPOINT_PATH = args.checkpoint_path
+CHECKPOINT_PATH = parameters.checkpoint_path
 OUTPUT_PATH = "./data/list"
 DATASET_NAME = "list_to_translate"
 
@@ -48,8 +58,8 @@ for path in [
 ]:
     Path(path).mkdir(parents=True, exist_ok=True)
 
-p = Pipeline(input_path=input_file, seed=args.seed,
-             examples_per_task=args.examples_per_task, min_list_length=args.min_list_length, max_list_length=args.max_list_length, tab_length=args.tab_length)
+p = Pipeline(input_path=parameters.input_file, seed=parameters.seed,
+             examples_per_task=parameters.examples_per_task, min_list_length=parameters.min_list_length, max_list_length=parameters.max_list_length, tab_length=parameters.tab_length)
 tasks, language, vocab = p.generate_data_strict()
 
 with open(train_data_path + "/tasks.json", "w") as outfile:
