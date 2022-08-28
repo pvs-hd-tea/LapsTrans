@@ -1,3 +1,5 @@
+## LapsTrans 
+See full documentation: http://lapstrans.rtfd.io/
 ### Getting started
 #### Option 1
 First you will have to solve non-trivial task of deploying LAPS on your machine. For instructions refer to [Deploying LapsTrans to Ubuntu 20](</ec/lapstrans_extensions/docs/For developers/Deploying LapsTrans to Ubuntu 20.md>)
