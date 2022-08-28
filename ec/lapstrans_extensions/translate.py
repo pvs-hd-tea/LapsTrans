@@ -1,5 +1,5 @@
 import os
-from lapstrans_extensions.utils.configuration import translate_py_arguments
+from utils.configuration import translate_py_arguments
 from pipeline.pipeline import Pipeline
 from pathlib import Path
 import json

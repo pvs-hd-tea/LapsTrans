@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from lapstrans_extensions.utils.configuration import generate_td_py_arguments
+from utils.configuration import generate_td_py_arguments
 from pipeline.pipeline import Pipeline
 
 args = generate_td_py_arguments()

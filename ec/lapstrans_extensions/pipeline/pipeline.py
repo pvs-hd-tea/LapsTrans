@@ -2,7 +2,6 @@ from inspect import getsource, getmembers, isfunction
 import importlib.util
 import sys
 import random
-import re
 from token import COMMENT as TOKEN_TYPE_COMMENT
 import tokenize
 from typing import Any, Dict, List, Tuple
