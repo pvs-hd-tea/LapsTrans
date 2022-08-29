@@ -55,7 +55,6 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 
-import sphinx_book_theme
 html_theme = 'sphinx_book_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
