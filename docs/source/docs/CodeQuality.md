@@ -1,6 +1,6 @@
-## Results
-### Code quality
-#### LoC
+
+## Code quality
+### LoC
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
 | . | 19 | 942 | 158 | 294 | 1,394 |
@@ -11,7 +11,7 @@
 | tests/helpers | 1 | 2 | 0 | 1 | 3 |
 | utils | 1 | 63 | 27 | 13 | 103 |
 
-#### Test coverage in ec/lapstrans_extensions
+### Test coverage in ec/lapstrans_extensions
 ```
 Name                                   Stmts   Miss  Cover
 ----------------------------------------------------------
@@ -30,5 +30,3 @@ It uses multiple nested dreamcoder classes, and would require unreliable imports
 - `generate_training_data.py` and `translate.py`, as these are just scripts that bootstrap the functionality implemented in other covered files.
 - `functions.py` -- functions written for model training. The errors here will be caught by Pipeline, and if not, will not affect the training, since the code will still correlate to the input-output, even if such behaviour was not expected by the human author.
 
-### Evaluation
-tbd

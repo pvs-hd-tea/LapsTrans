@@ -40,6 +40,7 @@ extensions = [
 ]
 
 autoapi_dirs = ['../../ec/lapstrans_extensions']
+autoapi_ignore = ["*/test_*.py", "*f_file*.py", "*functions*.py", "*generate_training_data*.py", "*translate*.py", "*cli_input*.py", "*tests*"]
 
 autosummary_generate = True
 
