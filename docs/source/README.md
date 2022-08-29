@@ -3,7 +3,7 @@
 ### How to - Start
 
 #### Option 1
-First you will have to solve non-trivial task of deploying LAPS on your machine. For instructions refer to [Deploying LapsTrans to Ubuntu 20](Deploying_LapsTrans_to_Ubuntu_20.md)
+First you will have to solve non-trivial task of deploying LAPS on your machine. For instructions refer to [Deploying LapsTrans to Ubuntu 20](https://lapstrans.readthedocs.io/en/latest/docs/For_developers/Deploying_LapsTrans_to_Ubuntu_20.html)
 
 #### Option 2
 Alternatively, if you have access to the Uni Heidelberg HPC, you can find deployed instance at `/home/container/lapstrans_home/LapsTrans`
@@ -26,7 +26,7 @@ python3.7 lapstrans_extensions/translate.py --cli config lapstrans_extensions/co
 For interactive input of functions.
 
 The results will be written to `lapstrans_extensions/working_dir/translation.json`, but you could modify that path and more through command line options and/or config.ini file.
-For more instructions go to [Configuration](/ec/lapstrans_extensions/docs/Configuration.md)
+For more instructions go to [Configuration](https://lapstrans.readthedocs.io/en/latest/docs/Configuration.html)
 
 ### How to - Data generation
 
@@ -38,7 +38,7 @@ python3.7 lapstrans_extensions/generate_training_data.py -i <Path to the file co
 This generates both language data for LAPS, as well as solved task examples for the dreamcoder portion of it.
 
 The results will be written to `ec/data/list/<Output name>`, but you could modify that path and more through command line options and/or config.ini file.
-For more instructions go to [Configuration](/ec/lapstrans_extensions/docs/Configuration.md)
+For more instructions go to [Configuration](https://lapstrans.readthedocs.io/en/latest/docs/Configuration.html)
 
 ### Notes
 
