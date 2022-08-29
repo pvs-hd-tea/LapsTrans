@@ -1,0 +1,732 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pipeline &#8212; LapsTrans 0.1 documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">LapsTrans 0.1 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Getting started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/Configuration.html">
+   Configuration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/Results.html">
+   Results
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/For_developers/Changes_to_LAPS.html">
+   For Developers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/For_developers/Deploying_LapsTrans_to_Ubuntu_20.html">
+   Deploying LapsTrans To Ubuntu
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/For_developers/translate.py.html">
+   Translate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../api.html">
+   Documented Functions
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../autoapi/index.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../autoapi/functions/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       functions
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../autoapi/f_file/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       f_file
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../autoapi/translate/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       translate
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../autoapi/generate_training_data/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       generate_training_data
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../autoapi/pipeline/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       pipeline
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../autoapi/cli_input/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       cli_input
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../autoapi/tests/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       tests
+      </span>
+     </code>
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../autoapi/tests/test_configuration/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         tests.test_configuration
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../autoapi/tests/test_lapstrans_type_identification/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         tests.test_lapstrans_type_identification
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../autoapi/tests/test_pipeline/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         tests.test_pipeline
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../autoapi/tests/test_tokenizer/index.html">
+       <code class="xref py py-mod docutils literal notranslate">
+        <span class="pre">
+         tests.test_tokenizer
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../autoapi/configuration/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       configuration
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../autoapi/translation_callback/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       translation_callback
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../autoapi/code_tokenizer/index.html">
+     <code class="xref py py-mod docutils literal notranslate">
+      <span class="pre">
+       code_tokenizer
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <h1>Source code for pipeline</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getsource</span><span class="p">,</span> <span class="n">getmembers</span><span class="p">,</span> <span class="n">isfunction</span>
+<span class="kn">import</span> <span class="nn">importlib.util</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">token</span> <span class="kn">import</span> <span class="n">COMMENT</span> <span class="k">as</span> <span class="n">TOKEN_TYPE_COMMENT</span>
+<span class="kn">import</span> <span class="nn">tokenize</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="c1"># Parameters</span>
+<div class="viewcode-block" id="INT_DEFINITION_SPACE"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.INT_DEFINITION_SPACE">[docs]</a><span class="n">INT_DEFINITION_SPACE</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span></div>
+<div class="viewcode-block" id="BOOL_DEFINITION_SPACE"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.BOOL_DEFINITION_SPACE">[docs]</a><span class="n">BOOL_DEFINITION_SPACE</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span></div>
+<div class="viewcode-block" id="NEWLINE_SYMBOL"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.NEWLINE_SYMBOL">[docs]</a><span class="n">NEWLINE_SYMBOL</span> <span class="o">=</span> <span class="s2">&quot;NEWLINE_SYMBOL&quot;</span></div>
+<div class="viewcode-block" id="TAB_SYMBOL"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.TAB_SYMBOL">[docs]</a><span class="n">TAB_SYMBOL</span> <span class="o">=</span> <span class="s2">&quot;TAB_SYMBOL&quot;</span></div>
+
+<div class="viewcode-block" id="INT_TYPE"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.INT_TYPE">[docs]</a><span class="n">INT_TYPE</span> <span class="o">=</span> <span class="s1">&#39;int&#39;</span></div>
+<div class="viewcode-block" id="BOOL_TYPE"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.BOOL_TYPE">[docs]</a><span class="n">BOOL_TYPE</span> <span class="o">=</span> <span class="s1">&#39;bool&#39;</span></div>
+<div class="viewcode-block" id="INT_LIST_TYPE"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.INT_LIST_TYPE">[docs]</a><span class="n">INT_LIST_TYPE</span> <span class="o">=</span> <span class="s1">&#39;list-of-int&#39;</span></div>
+<div class="viewcode-block" id="BOOL_LIST_TYPE"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.BOOL_LIST_TYPE">[docs]</a><span class="n">BOOL_LIST_TYPE</span> <span class="o">=</span> <span class="s1">&#39;list-of-bool&#39;</span></div>
+<div class="viewcode-block" id="EMPTY_LIST"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.EMPTY_LIST">[docs]</a><span class="n">EMPTY_LIST</span> <span class="o">=</span> <span class="s1">&#39;empty_list&#39;</span></div>
+
+
+<div class="viewcode-block" id="soft_remove"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.soft_remove">[docs]</a><span class="k">def</span> <span class="nf">soft_remove</span><span class="p">(</span><span class="n">l</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Attempts to remove a value from the list in place, but does not raise an exception if value is not there</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        l (List): muteable list</span>
+<span class="sd">        v (Any): value to remove</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="is_identity_mapping"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.is_identity_mapping">[docs]</a><span class="k">def</span> <span class="nf">is_identity_mapping</span><span class="p">(</span><span class="n">examples</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Checks if &quot;i&quot; and &quot;o&quot; in ALL tuples in examples match</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        examples (List[Dict[str, Any]]): examples generated within Pipeline.process_a_function() in a dreamcoder&#39;s solved examples format</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">match</span> <span class="ow">and</span> <span class="p">(</span><span class="n">each</span><span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">each</span><span class="p">[</span><span class="s2">&quot;o&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">match</span></div>
+
+
+<div class="viewcode-block" id="Pipeline"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline">[docs]</a><span class="k">class</span> <span class="nc">Pipeline</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handles generation of training data from a given file path.</span>
+<span class="sd">    Two functions you may be interested in are </span>
+<span class="sd">    generate_data_shuffled()</span>
+<span class="sd">    and</span>
+<span class="sd">    generate_data_strict()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">data_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">examples_per_task</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">min_list_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_list_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">tab_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            input_path (str): The path to the input file containing functions used to generated examples and language.</span>
+<span class="sd">            seed (int, optional): Seed used in random number generator. Defaults to 1984.</span>
+<span class="sd">            data_size (int): The size of the training dataset. Only required if using Pipeline to generate training data.</span>
+<span class="sd">            examples_per_task (int): Number of examples (i.e. input-output tuples per each task).</span>
+<span class="sd">            min_list_length (int): Minimum length of an input list in every example.</span>
+<span class="sd">            max_list_length (int): Maximum length of an input list in every example.</span>
+<span class="sd">            tab_length (int): The length of indentation (if, as per PEP8, spaces are used for indentation).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If required argument is missed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">input_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Pipeline requires input file path&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">examples_per_task</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Number of examples per task is not set. Did you specify default value?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">min_list_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Minimum list length for input is not set. Did you specify default value?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">max_list_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Maximum list length for input is not set. Did you specify default value?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">seed</span> <span class="o">=</span> <span class="mi">1984</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">DATA_SIZE</span> <span class="o">=</span> <span class="n">data_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">EXAMPLES_PER_TASK</span> <span class="o">=</span> <span class="n">examples_per_task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MIN_LIST_LENGTH</span> <span class="o">=</span> <span class="n">min_list_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MAX_LIST_LENGTH</span> <span class="o">=</span> <span class="n">max_list_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TAB_LENGTH</span> <span class="o">=</span> <span class="n">tab_length</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading functions from </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">input_path</span>
+
+        <span class="n">spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_file_location</span><span class="p">(</span><span class="s2">&quot;functions&quot;</span><span class="p">,</span> <span class="n">input_path</span><span class="p">)</span>
+        <span class="n">functions</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s2">&quot;functions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">functions</span>
+        <span class="n">spec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">functions</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">function_list</span> <span class="o">=</span> <span class="n">getmembers</span><span class="p">(</span><span class="n">functions</span><span class="p">,</span> <span class="n">isfunction</span><span class="p">)</span>
+
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_names_iterators</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Core</span>
+<div class="viewcode-block" id="Pipeline._random_list_int"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline._random_list_int">[docs]</a>    <span class="k">def</span> <span class="nf">_random_list_int</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;List of random integers.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[int]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">list_len</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MIN_LIST_LENGTH</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_LIST_LENGTH</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">INT_DEFINITION_SPACE</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">list_len</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Pipeline._random_list_bool"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline._random_list_bool">[docs]</a>    <span class="k">def</span> <span class="nf">_random_list_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;List of random booleans.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[bool]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">list_len</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MIN_LIST_LENGTH</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_LIST_LENGTH</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">BOOL_DEFINITION_SPACE</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">list_len</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Pipeline._random_int"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline._random_int">[docs]</a>    <span class="k">def</span> <span class="nf">_random_int</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">INT_DEFINITION_SPACE</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Pipeline._random_bool"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline._random_bool">[docs]</a>    <span class="k">def</span> <span class="nf">_random_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">BOOL_DEFINITION_SPACE</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Pipeline._generate_vocab"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline._generate_vocab">[docs]</a>    <span class="k">def</span> <span class="nf">_generate_vocab</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generates vocabulary data for language model.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List: Vocabulary data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">byte_stream</span><span class="p">:</span>
+            <span class="n">token_objs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tokenize</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">byte_stream</span><span class="o">.</span><span class="n">readline</span><span class="p">))</span>
+            <span class="n">comments_tokenized</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">token_objs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">each</span><span class="o">.</span><span class="n">exact_type</span> <span class="o">==</span> <span class="n">TOKEN_TYPE_COMMENT</span><span class="p">:</span>
+                    <span class="n">comment_string</span> <span class="o">=</span> <span class="n">each</span><span class="o">.</span><span class="n">string</span>
+                    <span class="n">comment_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="n">comment_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="n">comment_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">NEWLINE_SYMBOL</span><span class="p">)</span>
+                    <span class="n">comment_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">TAB_SYMBOL</span><span class="p">)</span>
+                    <span class="n">comment_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="n">comments_tokenized</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">comment_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span>
+            <span class="n">unique_comments_tokenized</span> <span class="o">=</span> <span class="p">{</span><span class="n">each</span> <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">comments_tokenized</span><span class="p">}</span>
+
+            <span class="c1"># filter out comments:</span>
+            <span class="n">token_objs</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">exact_type</span> <span class="o">!=</span>
+                                <span class="n">TOKEN_TYPE_COMMENT</span><span class="p">,</span> <span class="n">token_objs</span><span class="p">)</span>
+
+            <span class="n">unique_token_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">token</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">token_objs</span><span class="p">}</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">unique_token_names</span><span class="p">)</span> <span class="o">+</span> \
+            <span class="nb">list</span><span class="p">(</span><span class="n">unique_comments_tokenized</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">NEWLINE_SYMBOL</span><span class="p">,</span> <span class="n">TAB_SYMBOL</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+        <span class="n">soft_remove</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">soft_remove</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">soft_remove</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">soft_remove</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">tab</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">TAB_LENGTH</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="n">soft_remove</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">tab</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="Pipeline._type_def_to_sample"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline._type_def_to_sample">[docs]</a>    <span class="n">_type_def_to_sample</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">INT_TYPE</span><span class="p">:</span> <span class="n">_random_int</span><span class="p">,</span>
+        <span class="n">BOOL_TYPE</span><span class="p">:</span> <span class="n">_random_bool</span><span class="p">,</span>
+        <span class="n">INT_LIST_TYPE</span><span class="p">:</span> <span class="n">_random_list_int</span><span class="p">,</span>
+        <span class="n">BOOL_LIST_TYPE</span><span class="p">:</span> <span class="n">_random_list_bool</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+<div class="viewcode-block" id="Pipeline.process_a_function"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline.process_a_function">[docs]</a>    <span class="k">def</span> <span class="nf">process_a_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_name</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Generates pseudo training data (one example set per function). To be used for translating functions.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List, Dict, List: List of examples, language annotation for all examples, vocabulary data for language mode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">function_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_names_iterators</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task_names_iterators</span><span class="p">[</span><span class="n">function_name</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_names_iterators</span><span class="p">[</span><span class="n">function_name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">source_code</span> <span class="o">=</span> <span class="n">getsource</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+        <span class="n">source_code</span> <span class="o">=</span> <span class="n">source_code</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TAB_LENGTH</span> <span class="o">*</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">identify_types</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+        <span class="n">type_iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">example_set</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">language_set</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">input_type</span><span class="p">,</span> <span class="n">output_type</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="n">task_name</span> <span class="o">=</span> <span class="n">function_name</span> <span class="o">+</span> \
+                <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_names_iterators</span><span class="p">[</span><span class="n">function_name</span><span class="p">])</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">type_iter</span><span class="p">)</span>
+            <span class="n">examples</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">EXAMPLES_PER_TASK</span><span class="p">):</span>
+                    <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_def_to_sample</span><span class="p">[</span><span class="n">input_type</span><span class="p">](</span><span class="bp">self</span><span class="p">)</span>
+                    <span class="n">output</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+                    <span class="n">examples</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;i&quot;</span><span class="p">:</span> <span class="nb">input</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">:</span> <span class="n">output</span><span class="p">})</span>
+                <span class="k">if</span> <span class="n">is_identity_mapping</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
+                    <span class="c1"># If it&#39;s identity mapping, but data type is boolean, probably we just unnecessary identified that the function can accept booleans</span>
+                    <span class="k">if</span> <span class="n">input_type</span> <span class="o">==</span> <span class="n">BOOL_LIST_TYPE</span> <span class="ow">or</span> <span class="n">input_type</span> <span class="o">==</span> <span class="n">BOOL_TYPE</span><span class="p">:</span>
+                        <span class="n">examples</span> <span class="o">=</span> <span class="kc">None</span>
+                        <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="c1"># If it&#39;s identity mapping, but data type is not boolean, regenerate data</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">examples</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">processed_data_for_function</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">input_type</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">output_type</span><span class="p">},</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">task_name</span><span class="p">,</span>
+                <span class="s2">&quot;examples&quot;</span><span class="p">:</span> <span class="n">examples</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">example_set</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">processed_data_for_function</span><span class="p">)</span>
+            <span class="n">language_set</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">task_name</span><span class="p">:</span> <span class="p">[</span><span class="n">source_code</span><span class="p">]})</span>
+            <span class="n">type_iter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">example_set</span><span class="p">,</span> <span class="n">language_set</span></div>
+
+<div class="viewcode-block" id="Pipeline.generate_data_shuffled"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline.generate_data_shuffled">[docs]</a>    <span class="k">def</span> <span class="nf">generate_data_shuffled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Generates training data up to the DATA_SIZE. To be used for training data generation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List, Dict, List: List of examples, language annotation for all examples, vocabulary data for language mode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">DATA_SIZE</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Can not generate training data without specifying target size of it.&quot;</span><span class="p">)</span>
+        <span class="n">examples_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">language_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">examples_data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">DATA_SIZE</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">function_name</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function_list</span><span class="p">)</span>
+            <span class="n">example_set</span><span class="p">,</span> <span class="n">language_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_a_function</span><span class="p">(</span>
+                <span class="n">function_name</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+            <span class="n">examples_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">example_set</span><span class="p">)</span>
+            <span class="n">language_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">language_set</span><span class="p">)</span>
+
+        <span class="n">vocab_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_vocab</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">examples_data</span><span class="p">,</span> <span class="n">language_data</span><span class="p">,</span> <span class="n">vocab_data</span></div>
+
+<div class="viewcode-block" id="Pipeline.generate_data_strict"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline.generate_data_strict">[docs]</a>    <span class="k">def</span> <span class="nf">generate_data_strict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">examples_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">language_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">function_name</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_list</span><span class="p">:</span>
+            <span class="n">example_set</span><span class="p">,</span> <span class="n">language_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_a_function</span><span class="p">(</span>
+                <span class="n">function_name</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+            <span class="n">examples_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">example_set</span><span class="p">)</span>
+            <span class="n">language_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">language_set</span><span class="p">)</span>
+
+        <span class="n">vocab_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_vocab</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">examples_data</span><span class="p">,</span> <span class="n">language_data</span><span class="p">,</span> <span class="n">vocab_data</span></div>
+
+<div class="viewcode-block" id="Pipeline._infer_instance_type"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline._infer_instance_type">[docs]</a>    <span class="k">def</span> <span class="nf">_infer_instance_type</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Infers the type of an instance, returns one of:</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            instance (Any): instance to infer type of</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: If the instance of an unexpected type</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: One of</span>
+<span class="sd">                INT_TYPE</span>
+<span class="sd">                BOOL_TYPE</span>
+<span class="sd">                INT_LIST_TYPE</span>
+<span class="sd">                BOOL_LIST_TYPE</span>
+<span class="sd">                EMPTY_LIST</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BOOL_TYPE</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">INT_TYPE</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># return EMPTY_LIST</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instance</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">bool</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">BOOL_LIST_TYPE</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instance</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">INT_LIST_TYPE</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="Pipeline.identify_types"><a class="viewcode-back" href="../autoapi/pipeline/index.html#pipeline.Pipeline.identify_types">[docs]</a>    <span class="k">def</span> <span class="nf">identify_types</span><span class="p">(</span><span class="n">function</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of all input-output type combinations, that could be processed by the passed function</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Tuple[str, str]]: List of tuples of types of input-output pairs,</span>
+<span class="sd">            Each is one of: </span>
+<span class="sd">            INT_TYPE</span>
+<span class="sd">            BOOL_TYPE</span>
+<span class="sd">            INT_LIST_TYPE</span>
+<span class="sd">            BOOL_LIST_TYPE</span>
+<span class="sd">            EMPTY_LIST</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">INTEGER</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="n">BOOL</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">INTEGER_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+        <span class="n">BOOL_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+
+        <span class="n">types</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">INT_TYPE</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">BOOL_TYPE</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">INT_LIST_TYPE</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">BOOL_LIST_TYPE</span><span class="p">:</span> <span class="kc">None</span>
+        <span class="p">}</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">test_return</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">INTEGER</span><span class="p">)</span>
+            <span class="n">types</span><span class="p">[</span><span class="n">INT_TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">_infer_instance_type</span><span class="p">(</span><span class="n">test_return</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">test_return</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">BOOL</span><span class="p">)</span>
+            <span class="n">types</span><span class="p">[</span><span class="n">BOOL_TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">_infer_instance_type</span><span class="p">(</span><span class="n">test_return</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">test_return</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">INTEGER_LIST</span><span class="p">)</span>
+            <span class="n">types</span><span class="p">[</span><span class="n">INT_LIST_TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">_infer_instance_type</span><span class="p">(</span><span class="n">test_return</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">test_return</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">BOOL_LIST</span><span class="p">)</span>
+            <span class="n">types</span><span class="p">[</span><span class="n">BOOL_LIST_TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="o">.</span><span class="n">_infer_instance_type</span><span class="p">(</span><span class="n">test_return</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">types</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">result</span></div></div>
+</pre></div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Egor Svezhintsev, Szymon Szmajdzinski<br/>
+  
+      &copy; Copyright 2022, Egor Svezhintsev, Szymon Szmajdzinski.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

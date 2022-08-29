@@ -36,7 +36,10 @@ extensions = [
 'sphinx.ext.autodoc',
 'sphinx.ext.autosummary',
 "sphinx.ext.viewcode",
+'autoapi.extension',
 ]
+
+autoapi_dirs = ['../../ec/lapstrans_extensions']
 
 autosummary_generate = True
 
