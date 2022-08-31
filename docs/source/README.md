@@ -1,4 +1,4 @@
-### About
+## About
 
 LapsTrans is a research project by students from Heidelberg University, done in a practial work format with guidance of [Parallel and Distributed Systems Group of Heidelberg University](https://pvs.ifi.uni-heidelberg.de/home) and Dr.Prof. Artur Andrzejak.  
 Based on the paper ["Leveraging Language to Learn Program Abstractions and Search Heuristics" C. Wong, K. Ellis et al.](https://arxiv.org/abs/2106.11053), 
