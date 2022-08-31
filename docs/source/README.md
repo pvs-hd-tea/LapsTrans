@@ -1,3 +1,9 @@
+### About
+
+LapsTrans is a research project by students from Heidelberg University, done in a practial work format with guidance of [Parallel and Distributed Systems Group of Heidelberg University](https://pvs.ifi.uni-heidelberg.de/home) and Dr.Prof. Artur Andrzejak.  
+Based on the paper ["Leveraging Language to Learn Program Abstractions and Search Heuristics" C. Wong, K. Ellis et al.](https://arxiv.org/abs/2106.11053), 
+and the original software project accessible at [authors' repository](https://github.com/ellisk42/ec), LapsTrans strives to exploit trained LAPS model to translate domain specific python code to LISP.
+
 ## Getting started
 
 ### How to - Start
@@ -17,6 +23,10 @@ source /home/container/lapstrans_home/env.sourcefile
 To execute the translation script, navigate to the `ec/` directory, type in the terminal
 ```
 python3.7 lapstrans_extensions/translate.py -i <Path to the file containing the function to translate> config lapstrans_extensions/config.ini
+```
+for example
+```
+python3.7 lapstrans_extensions/translate.py -i lapstrans_extensions/f_file.py config lapstrans_extensions/config.ini
 ```
 or 
 ```
