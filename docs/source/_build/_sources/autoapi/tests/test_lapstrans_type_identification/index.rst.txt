@@ -1,0 +1,54 @@
+:py:mod:`tests.test_lapstrans_type_identification`
+==================================================
+
+.. py:module:: tests.test_lapstrans_type_identification
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   tests.test_lapstrans_type_identification.test_to_Bool
+   tests.test_lapstrans_type_identification.test_to_Int
+   tests.test_lapstrans_type_identification.test_to_Int_but_not_Bool_0
+   tests.test_lapstrans_type_identification.test_to_Int_but_not_Bool_1
+   tests.test_lapstrans_type_identification.test_Ambiguous_Mult
+   tests.test_lapstrans_type_identification.test_Only_Bool
+   tests.test_lapstrans_type_identification.test_Only_Int
+   tests.test_lapstrans_type_identification.test_Only_Int_List
+   tests.test_lapstrans_type_identification.test_Only_Bool_List
+
+
+
+.. py:function:: test_to_Bool()
+
+
+.. py:function:: test_to_Int()
+
+
+.. py:function:: test_to_Int_but_not_Bool_0()
+
+
+.. py:function:: test_to_Int_but_not_Bool_1()
+
+
+.. py:function:: test_Ambiguous_Mult()
+
+
+.. py:function:: test_Only_Bool()
+
+
+.. py:function:: test_Only_Int()
+
+
+.. py:function:: test_Only_Int_List()
+
+
+.. py:function:: test_Only_Bool_List()
+
+

@@ -18,7 +18,8 @@ except AttributeError:
 
 # Override with arguments
 for k, v in args.__dict__.items():
-    parameters.__setattr__(k, v)
+    if v is not None:
+        parameters.__setattr__(k, v)
 
 
 # Resolve input
@@ -40,7 +41,7 @@ if parameters.cli:
             else:
                 one_stop = False
 else:
-    input_file = parameters.input_path
+    parameters.input_file = parameters.input_path
 
 CHECKPOINT_PATH = parameters.checkpoint_path
 OUTPUT_PATH = "./data/list"

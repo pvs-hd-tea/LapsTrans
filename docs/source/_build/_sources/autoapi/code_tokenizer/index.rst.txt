@@ -1,0 +1,74 @@
+:py:mod:`code_tokenizer`
+========================
+
+.. py:module:: code_tokenizer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   code_tokenizer.FauxStream
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   code_tokenizer.tokenize_codestring
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   code_tokenizer.TAB_SYMBOL
+   code_tokenizer.NEWLINE_SYMBOL
+
+
+.. py:data:: TAB_SYMBOL
+   :annotation: = TAB_SYMBOL
+
+   
+
+.. py:data:: NEWLINE_SYMBOL
+   :annotation: = NEWLINE_SYMBOL
+
+   
+
+.. py:class:: FauxStream(initial_content: str)
+
+   Python tokenize library, although very useful to us, has a purpose so specific,
+   that it only takes readline-like callable generator objects, and in python 3.7 only with byte returns.
+   Instead of digging deeper into tokenize lib, we make a fake bytestream-like wrapper.
+
+   .. py:method:: pop() -> bytes
+
+      The streaming callback
+
+      :raises StopIteration: raised once the buffer is empty
+
+      :returns: Content of the buffer
+      :rtype: bytes
+
+
+
+.. py:function:: tokenize_codestring(string) -> List[str]
+
+   Custom tokenizer for python source code. Since NLTK and other natural language tokenizers are useless in the context of reading source code, we replaced the tokenizer in LAPS dreamcoder with this one.
+
+   :param string: Python code in the utf-8 format.
+   :type string: str
+
+   :returns: tokenized code
+   :rtype: List[str]
+
+

@@ -1,0 +1,22 @@
+:py:mod:`f_file`
+================
+
+.. py:module:: f_file
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   f_file.maximize
+
+
+
+.. py:function:: maximize(inp)
+
+

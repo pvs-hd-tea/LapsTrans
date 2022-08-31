@@ -1,0 +1,40 @@
+:py:mod:`translation_callback`
+==============================
+
+.. py:module:: translation_callback
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   translation_callback.write_translations
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   translation_callback.WRITE_TO
+
+
+.. py:data:: WRITE_TO
+   :annotation: = lapstrans_extensions/working_dir/translation.json
+
+   
+
+.. py:function:: write_translations(frontiers: List) -> None
+
+   When using LAPS to translate python code, this function will be called after one pass in dreamcoder.py, write down the translation results into .json file, and kill the execution.
+
+   :param frontiers: Results of the translation (returned from wakeGenerative() in dreamcoder.py)
+   :type frontiers: List[Frontier]
+
+

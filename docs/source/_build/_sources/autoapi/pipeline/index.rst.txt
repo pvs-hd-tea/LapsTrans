@@ -1,0 +1,204 @@
+:py:mod:`pipeline`
+==================
+
+.. py:module:: pipeline
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   pipeline.Pipeline
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   pipeline.soft_remove
+   pipeline.is_identity_mapping
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   pipeline.INT_DEFINITION_SPACE
+   pipeline.BOOL_DEFINITION_SPACE
+   pipeline.NEWLINE_SYMBOL
+   pipeline.TAB_SYMBOL
+   pipeline.INT_TYPE
+   pipeline.BOOL_TYPE
+   pipeline.INT_LIST_TYPE
+   pipeline.BOOL_LIST_TYPE
+   pipeline.EMPTY_LIST
+
+
+.. py:data:: INT_DEFINITION_SPACE
+   
+
+   
+
+.. py:data:: BOOL_DEFINITION_SPACE
+   :annotation: = [True, False]
+
+   
+
+.. py:data:: NEWLINE_SYMBOL
+   :annotation: = NEWLINE_SYMBOL
+
+   
+
+.. py:data:: TAB_SYMBOL
+   :annotation: = TAB_SYMBOL
+
+   
+
+.. py:data:: INT_TYPE
+   :annotation: = int
+
+   
+
+.. py:data:: BOOL_TYPE
+   :annotation: = bool
+
+   
+
+.. py:data:: INT_LIST_TYPE
+   :annotation: = list-of-int
+
+   
+
+.. py:data:: BOOL_LIST_TYPE
+   :annotation: = list-of-bool
+
+   
+
+.. py:data:: EMPTY_LIST
+   :annotation: = empty_list
+
+   
+
+.. py:function:: soft_remove(l: List, v: Any) -> None
+
+   Attempts to remove a value from the list in place, but does not raise an exception if value is not there
+
+   :param l: muteable list
+   :type l: List
+   :param v: value to remove
+   :type v: Any
+
+
+.. py:function:: is_identity_mapping(examples: List[Dict[str, Any]]) -> bool
+
+   Checks if "i" and "o" in ALL tuples in examples match
+
+   :param examples: examples generated within Pipeline.process_a_function() in a dreamcoder's solved examples format
+   :type examples: List[Dict[str, Any]]
+
+   :returns: bool
+
+
+.. py:class:: Pipeline(input_path: str = None, seed: int = None, data_size: int = None, examples_per_task: int = None, min_list_length: int = None, max_list_length: int = None, tab_length: int = None)
+
+   Handles generation of training data from a given file path.
+   Two functions you may be interested in are
+   generate_data_shuffled()
+   and
+   generate_data_strict()
+
+   .. py:attribute:: _type_def_to_sample
+      
+
+      
+
+   .. py:method:: _random_list_int() -> List[int]
+
+      List of random integers.
+
+      :returns: List[int]
+
+
+   .. py:method:: _random_list_bool() -> List[bool]
+
+      List of random booleans.
+
+      :returns: List[bool]
+
+
+   .. py:method:: _random_int()
+
+
+   .. py:method:: _random_bool()
+
+
+   .. py:method:: _generate_vocab()
+
+      Generates vocabulary data for language model.
+
+      :returns: Vocabulary data.
+      :rtype: List
+
+
+   .. py:method:: process_a_function(function_name, function) -> Tuple[List[Dict], List[Dict]]
+
+      Generates pseudo training data (one example set per function). To be used for translating functions.
+
+      :returns: List of examples, language annotation for all examples, vocabulary data for language mode
+      :rtype: List, Dict, List
+
+
+   .. py:method:: generate_data_shuffled() -> Tuple[List, Dict, List]
+
+      Generates training data up to the DATA_SIZE. To be used for training data generation.
+
+      :returns: List of examples, language annotation for all examples, vocabulary data for language mode
+      :rtype: List, Dict, List
+
+
+   .. py:method:: generate_data_strict()
+
+
+   .. py:method:: _infer_instance_type() -> str
+
+      Infers the type of an instance, returns one of:
+
+      :param instance: instance to infer type of
+      :type instance: Any
+
+      :raises NotImplementedError: If the instance of an unexpected type
+
+      :returns:
+
+                One of
+                    INT_TYPE
+                    BOOL_TYPE
+                    INT_LIST_TYPE
+                    BOOL_LIST_TYPE
+                    EMPTY_LIST
+      :rtype: str
+
+
+   .. py:method:: identify_types() -> List[Tuple[str, str]]
+
+      Returns a list of all input-output type combinations, that could be processed by the passed function
+
+      :returns: List of tuples of types of input-output pairs,
+                Each is one of:
+                INT_TYPE
+                BOOL_TYPE
+                INT_LIST_TYPE
+                BOOL_LIST_TYPE
+                EMPTY_LIST
+      :rtype: List[Tuple[str, str]]
+
+
+

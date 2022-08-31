@@ -1,0 +1,70 @@
+:py:mod:`tests.test_pipeline`
+=============================
+
+.. py:module:: tests.test_pipeline
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   tests.test_pipeline.test_soft_remove
+   tests.test_pipeline.test_identity_mapping
+   tests.test_pipeline.pipeline_bootstrap
+   tests.test_pipeline.test_pipeline_bootstrap
+   tests.test_pipeline.test_random_list_int
+   tests.test_pipeline.test_random_list_bool
+   tests.test_pipeline.test_random_int
+   tests.test_pipeline.test_random_bool
+   tests.test_pipeline.test_generate_vocab
+   tests.test_pipeline.test_process_function
+   tests.test_pipeline.test_generate_data_strict
+   tests.test_pipeline.test_generate_data_shuffled
+   tests.test_pipeline.test_identify_types
+
+
+
+.. py:function:: test_soft_remove()
+
+
+.. py:function:: test_identity_mapping()
+
+
+.. py:function:: pipeline_bootstrap()
+
+
+.. py:function:: test_pipeline_bootstrap()
+
+
+.. py:function:: test_random_list_int()
+
+
+.. py:function:: test_random_list_bool()
+
+
+.. py:function:: test_random_int()
+
+
+.. py:function:: test_random_bool()
+
+
+.. py:function:: test_generate_vocab()
+
+
+.. py:function:: test_process_function()
+
+
+.. py:function:: test_generate_data_strict()
+
+
+.. py:function:: test_generate_data_shuffled()
+
+
+.. py:function:: test_identify_types()
+
+

@@ -2,18 +2,24 @@ LapsTrans
 =====================================
 
 
-LapsTrans is an extension to LAPS which enables user to translate python code to lambda expressions.
+LapsTrans is an extension to LAPS which enables user to translate python code to LISP.
+
+Link to repository: `LapsTrans <https://github.com/pvs-hd-tea/LapsTrans>`_ 
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   README
-   docs/Configuration
-   docs/Results
-   docs/For_developers/Changes_to_LAPS
-   docs/For_developers/Deploying_LapsTrans_to_Ubuntu_20
+   README.md
+   docs/Configuration.md
+   docs/CodeQuality.md
+   docs/Evaluation.md
+   docs/WorkDistr.md
+   docs/For_developers/Changes_to_LAPS.md
+   docs/For_developers/Deploying_LapsTrans_to_Ubuntu_20.md
    docs/For_developers/translate.py.md
+   
+
 
 
 

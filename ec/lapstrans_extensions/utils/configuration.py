@@ -12,12 +12,11 @@ def generate_td_py_arguments() -> argparse.ArgumentParser:
         description='Generate training data for LapsTrans project.')
     parser.add_argument(
         '-i', '--input_path', help='Path of the file with functions used for training', type=str)
-    parser.add_argument('-p', '--output_path', help='Custom output path. Default: ./data/list/',
-                        default="./data/list")
+    parser.add_argument('-p', '--output_path', help='Custom output path.')
     parser.add_argument('-o', '--output_name',
                         help='Custom output dataset name')
     parser.add_argument('--data_size', type=int,
-                        help='The size of the training dataset generated. Default: 500', default=500)
+                        help='The size of the training dataset generated.')
     return parser
 
 
@@ -36,7 +35,7 @@ def translate_py_arguments() -> argparse.ArgumentParser:
     cli_input_group.add_argument(
         '-i', '--input_path', help='Path of the file with functions to translate.', type=str)
     parser.add_argument('-c', '--checkpoint_path',
-                        help='Path of the *.pickle file with trained model. Default: trained.pickle', type=str, default="smart.pickle")
+                        help='Path of the *.pickle file with trained model.', type=str)
     return parser
 
 
@@ -57,15 +56,15 @@ def base_parser(description: str = None) -> argparse.ArgumentParser:
     config_subparser.add_argument(
         'config', type=str)
     parser.add_argument('--seed', type=int,
-                        help='Random generator seed.', default=1984)
+                        help='Random generator seed.')
     parser.add_argument('--min_list_length', type=int,
-                        help='Minimal list length to be used in input data generation. Default: 2', default=2)
+                        help='Minimal list length to be used in input data generation.')
     parser.add_argument('--max_list_length', type=int,
-                        help='Maximum list length to be used in input data generation. Default: 5', default=5)
+                        help='Maximum list length to be used in input data generation.')
     parser.add_argument('--examples_per_task', type=int,
-                        help='Number of input-output tuples per task in training data. Default: 30', default=30)
+                        help='Number of input-output tuples per task in training data.')
     parser.add_argument('--tab_length', type=int,
-                        help='Length of tabs in spaces in source code. Default: 4', default=4)
+                        help='Length of tabs in spaces in source code.')
     return parser
 
 

@@ -1,0 +1,70 @@
+:py:mod:`configuration`
+=======================
+
+.. py:module:: configuration
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   configuration.Storage
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   configuration.generate_td_py_arguments
+   configuration.translate_py_arguments
+   configuration.base_parser
+   configuration.args_from_config
+
+
+
+.. py:function:: generate_td_py_arguments() -> argparse.ArgumentParser
+
+   Callback to initialize configuration for generate_training_data.py script from command line, or config file.
+
+   :returns: argparse.ArgumentParser
+
+
+.. py:function:: translate_py_arguments() -> argparse.ArgumentParser
+
+   Callback to initialize configuration for translate.py script from command line, or config file.
+
+   :returns: argparse.ArgumentParser
+
+
+.. py:function:: base_parser(description: str = None) -> argparse.ArgumentParser
+
+   Base argument parser, for arguments used in both translate.py and generate_training_data.py scripts.
+
+   :param description: Description of the script as returned by cli. Defaults to None.
+   :type description: str, optional
+
+   :returns: base parser
+   :rtype: argparse.ArgumentParser
+
+
+.. py:class:: Storage
+
+
+.. py:function:: args_from_config(config_path: str, section_name: str = None)
+
+   Loads parameters for scripts from a .ini file instead of command line.
+
+   :param config_path: Path to .ini configuration.
+   :type config_path: str
+   :param section_name: The name of the extra section to load from config. [GLOBAL] section is always loaded, but may be overriden by values from this argument.
+   :type section_name: str, optional
+
+   :returns: Namespace-like object mimicking argparse.Namespace
+
+

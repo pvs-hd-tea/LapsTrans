@@ -1,0 +1,46 @@
+:py:mod:`tests.test_configuration`
+==================================
+
+.. py:module:: tests.test_configuration
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   tests.test_configuration.test_base_parser
+   tests.test_configuration.test_args_from_config_int
+   tests.test_configuration.test_args_from_config_str
+   tests.test_configuration.test_args_from_config_bool
+   tests.test_configuration.test_args_from_config_section
+   tests.test_configuration.test_translate_py_arguments
+   tests.test_configuration.test_generate_td_py_arguments
+
+
+
+.. py:function:: test_base_parser()
+
+
+.. py:function:: test_args_from_config_int()
+
+
+.. py:function:: test_args_from_config_str()
+
+
+.. py:function:: test_args_from_config_bool()
+
+
+.. py:function:: test_args_from_config_section()
+
+
+.. py:function:: test_translate_py_arguments()
+
+
+.. py:function:: test_generate_td_py_arguments()
+
+

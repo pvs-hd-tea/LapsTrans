@@ -1,0 +1,64 @@
+:py:mod:`generate_training_data`
+================================
+
+.. py:module:: generate_training_data
+
+
+Module Contents
+---------------
+
+.. py:data:: args
+   
+
+   
+
+.. py:data:: parameters
+   
+
+   
+
+.. py:data:: configuration_path
+   
+
+   
+
+.. py:data:: OUTPUT_PATH
+   
+
+   
+
+.. py:data:: OUTPUT_NAME
+   
+
+   
+
+.. py:data:: train_data_path
+   
+
+   
+
+.. py:data:: train_language_data_path
+   
+
+   
+
+.. py:data:: test_data_path
+   
+
+   
+
+.. py:data:: test_language_data_path
+   
+
+   
+
+.. py:data:: p
+   
+
+   
+
+.. py:data:: p
+   
+
+   
+
