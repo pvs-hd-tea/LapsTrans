@@ -14,6 +14,7 @@ Link to repository: `LapsTrans <https://github.com/pvs-hd-tea/LapsTrans>`_
    docs/Configuration.md
    docs/CodeQuality.md
    docs/Evaluation.md
+   docs/WorkDistr.md
    docs/For_developers/Changes_to_LAPS.md
    docs/For_developers/Deploying_LapsTrans_to_Ubuntu_20.md
    docs/For_developers/translate.py.md
